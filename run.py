@@ -151,7 +151,7 @@ def validate_pin(account_holder):
         code = input(f"""{Fore.GREEN}    Enter four digit pin: """).strip()
         print("\n")
         if code == account_holder.get_pin():
-            word_wrap(f"""    valid pin code, you have successfully logged in.\n\n""")
+            word_wrap(f"""    valid PIN, you have successfully logged in.\n\n""")
             break
         elif code != account_holder.get_pin():
             print(f"{Fore.RED}    !Pin code is not correct - {code}.\n")  
@@ -162,6 +162,94 @@ def validate_pin(account_holder):
     # show menu for user 
     # show_menu() 
     return True
+
+
+def deposit(account):
+    """ Deposit amount of money to own account,
+        updates the transaction worksheet and terminates
+        after 3 unsuccessfull attempts.
+     """
+    transact = []
+    trans_id = "D"+str(randint(0,101))+str(int(datetime.datetime.now().timestamp()))
+    transact.append(trans_id)
+    transact.append(account._acc_num)
+    transact.append(datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S"))
+    tries = 0
+    while tries < 3:
+        tries += 1
+        amount = input(f"""{Fore.GREEN}    Please enter how much money you want to lodge:$ """)
+        print("\n")
+        word_wrap(f"""   Checking the input amount ...\n""")
+        time.sleep(2)
+        if not amount.isnumeric():
+            print(f"""{Fore.RED}    Only figures of amount allowed - {amount}\n""")
+            status = False
+            new_balance = float(account.get_balance())
+        else:
+            status = True
+            new_balance = float(account.get_balance()) + float(amount)
+            break
+    else:
+        print(f"""{Fore.YELLOW}    Sorry you've reached your trial limit.\n""")
+        print(f"""    Consult bank officials by phone for further instructions.\n""")
+        #show_menu
+        # show_menu()
+    if not amount.isnumeric():
+        new_balance = float(account.get_balance())
+    else:
+        new_balance = float(account.get_balance()) + float(amount)
+    account.set_balance(new_balance)
+    print(f"""{Fore.WHITE}    Your current balance is {str(account.get_balance())} \n""")
+    card_holder = SHEET.worksheet('accounts').find(account._acc_num)
+    SHEET.worksheet('accounts').update_cell(card_holder.row, 5, str(int(account.get_balance())))
+    if status:
+        transact.append('SUCCESS')
+        print(f"""{Fore.GREEN}    Thank you {account.first_name} {account.last_name} for your deposit.\n""")
+    else:
+        transact.append('FAILURE')       
+    transact.append(amount)
+    SHEET.worksheet('transaction').append_row(transact)
+
+
+def withdraw(account):
+    """ withdraws amount of money from account
+        if availabe or shows corresponding error,
+        and updates the transaction worksheet.
+    """
+    transact = []
+    trans_id = "W"+str(randint(0, 101))+str(int(datetime.datetime.now().timestamp()))
+    transact.append(trans_id)
+    transact.append(account._acc_num)
+    transact.append(datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S"))
+    try:
+        amount = input(f"{Fore.GREEN}    How much money do you want to withdraw:$ ")
+        print("\n")
+        if not amount.isnumeric():
+            status = False
+            raise Exception(f"Only figures of amount allowed {amount}")
+        if float(account.get_balance()) < float(amount):
+            status = False
+            raise Exception(f"Sorry insufficient funds: {account.get_balance()}")
+        word_wrap(f"""    You are good to go! Thank you: \n""")
+        account.set_balance(float(account.get_balance()) - float(amount))
+        print(f"""    Your current balance is : {str(account.get_balance())}\n""")
+        card_holder = SHEET.worksheet('accounts').find(account._acc_num)
+        bal = str(int(account.get_balance()))
+        SHEET.worksheet('accounts').update_cell(card_holder.row, 5, bal)
+        status = True
+    except Exception as e:
+        print(f"""{Fore.RED}    {e}, {Fore.GREEN}perhaps you need  a credit.\n""")
+        print(f"""{Fore.GREEN}    Call the bank and talk things over with them.\n""")
+        status = False
+    if status:
+        transact.append('SUCCESS')
+    else:
+        transact.append('FAILURE')
+        # transact.append(amount)
+    camount = "-" + str(amount)       
+    transact.append(camount)
+    SHEET.worksheet('transaction').append_row(transact)
+    # show_menu()
 
 
 def display_account_details(account):
@@ -180,6 +268,27 @@ def display_account_details(account):
     print(table.draw())
 
 
+def transcript_receipt(account):
+    """ Displays all transactions of a user if any """
+    transactions = SHEET.worksheet('transaction').get_all_values()[1:]
+    user_transacts = [transact for transact in transactions if account._acc_num == transact[1]]
+    if len(user_transacts) == 0:
+        word_wrap(f"""{Fore.MAGENTA}You've no transactions done yet\n""")
+    else:
+        table = Texttable()
+        table.header(['TransactionId', 'AccountId', 'Date & Time', 'Status', 'Amount'])
+        for transcript in user_transacts:
+            if transcript[4][0] == '-' and transcript[4][1:].isnumeric() and transcript[3] == 'FAILURE':
+                transcript[4] += ' Insufficient fund.'
+            elif not transcript[4][-1].isnumeric():
+                transcript[4] += ' Invalid input'
+            table.add_row(transcript)
+        print(table.draw())
+
+
+
 user = validate__acc_num()
 validate_pin(user)
-display_account_details(user)
+withdraw(user)
+# display_account_details(user)
+transcript_receipt(user)
