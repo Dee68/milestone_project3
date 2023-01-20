@@ -7,6 +7,7 @@ from rich.console import Console
 import gspread
 from google.oauth2.service_account import Credentials
 from colorama import Fore
+from accounts import Account as account
 
 
 SCOPE = [
@@ -101,3 +102,82 @@ def create_user():
     debit_account_holder = account(user_account[0], user_account[1], user_account[2], user_account[3], user_account[4])
     SHEET.worksheet('accounts').append_row(user_account)
     return debit_account_holder
+
+
+def validate__acc_num():
+    """ Validates validity of user account number
+        and terminates after 3 unsuccessfull attempts.
+        Returns false on failure or returns account object on success.
+    """
+    account_holders = SHEET.worksheet('accounts').get_all_values()[1:]
+    tries = 0
+    while tries < 3:
+        tries += 1
+        num = input("\033[1m" + f"""{Fore.WHITE}    Enter account number here: """).strip()
+        print("\n")
+        current_user = [holder for holder in account_holders if num == holder[0]]
+        if len(current_user) == 0:
+            print(f"""{Fore.RED}    Account not recognized {num} \n""")
+        else:
+            break
+    else:
+        print(f"""{Fore.RED}    You have exceeded trial limit, please create an account.\n\n""")
+        print(f"""{Fore.GREEN}    Thank you for using our services.\n""")
+        time.sleep(2)
+        return False
+        # show_menu()
+        # sys.exit()
+    time.sleep(3)
+    print(f"""{Fore.GREEN}    Checking validity of card ...\n""")
+    word_wrap(f"""    Account valid proceed to enter PIN ...\n\n""")
+    t_1 = current_user[0][0]
+    t_2 = current_user[0][1]
+    t_3 = current_user[0][2]
+    t_4 = current_user[0][3]
+    t_5 = current_user[0][4]
+
+    return account(t_1, t_2, t_3, t_4, t_5)
+
+
+def validate_pin(account_holder):
+    """ Validates user input for PIN
+        and terminates after 3 unsuccessfull attempts.
+        Returns false or true.
+    """
+    tries = 0
+    while tries < 3:
+        tries += 1
+        code = input(f"""{Fore.GREEN}    Enter four digit pin: """).strip()
+        print("\n")
+        if code == account_holder.get_pin():
+            word_wrap(f"""    valid pin code, you have successfully logged in.\n\n""")
+            break
+        elif code != account_holder.get_pin():
+            print(f"{Fore.RED}    !Pin code is not correct - {code}.\n")  
+    else:
+        print(f"""{Fore.YELLOW}   You have exceeded trial limit, please contact bank officials by phone.\n\n""")
+        print(f"""{Fore.GREEN}    Thank you for using our services.\n""")
+        return False
+    # show menu for user 
+    # show_menu() 
+    return True
+
+
+def display_account_details(account):
+    """ Displays account details of a logged in user."""
+    account_holders = SHEET.worksheet('accounts').get_all_values()[1:]
+    current_user = [holder for holder in account_holders if account._acc_num == holder[0]]
+    table = Table(title="Account Details")
+    columns = ['Account Number','First Name', 'Last Name', 'PIN','Balance']
+    for column in columns:
+        table.add_column(column)
+    for user in current_user:
+        table.add_row(*user,style='bright_green')
+
+    console = Console()
+    console.print(table)
+
+
+user = validate__acc_num()
+validate_pin(user)
+display_account_details(user)
