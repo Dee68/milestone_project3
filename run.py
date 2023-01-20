@@ -286,9 +286,56 @@ def transcript_receipt(account):
         print(table.draw())
 
 
+def main():
+    """ Run all functions of program. Controls the flow of the system """
+    # show something before menu of options
+    
+    start = True
+    while start:
+        # show_menu()
+        option = int(input("Enter option: "))
+        if option == 1:
+            #create user
+            create_user()
+            start = False
+            break
+        if option == 2:
+            account_holder = validate__acc_num()
+            if validate_pin(account_holder):
+                deposit(account_holder)
+                start = False
+                break
+        if option == 3:
+            account_holder = validate__acc_num()
+            if validate_pin(account_holder):
+                withdraw(account_holder)
+                start = False
+                break
+        if option == 4:
+            account_holder = validate__acc_num()
+            if validate_pin(account_holder):
+                display_account_details(account_holder)
+                start = False
+                break
+        if option == 5:
+            account_holder = validate__acc_num()
+            if validate_pin(account_holder):
+                transcript_receipt(account_holder)
+                start = False
+                break
+        if option == 6:
+            print("Thank you for using our services.")
+            sys.exit()
+        else:
+            print("Invalid option, please try again")
+    show_menu()
 
+
+show_menu()
 user = validate__acc_num()
 validate_pin(user)
-withdraw(user)
-# display_account_details(user)
+# withdraw(user)
+# # display_account_details(user)
 transcript_receipt(user)
+
+# main()
