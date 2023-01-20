@@ -2,8 +2,9 @@ import datetime
 import sys
 import time
 from random import randint
-from rich.table import Table
-from rich.console import Console
+from texttable import Texttable
+# from rich.table import Table
+# from rich.console import Console
 import gspread
 from google.oauth2.service_account import Credentials
 from colorama import Fore
@@ -167,15 +168,16 @@ def display_account_details(account):
     """ Displays account details of a logged in user."""
     account_holders = SHEET.worksheet('accounts').get_all_values()[1:]
     current_user = [holder for holder in account_holders if account._acc_num == holder[0]]
-    table = Table(title="Account Details")
-    columns = ['Account Number','First Name', 'Last Name', 'PIN','Balance']
-    for column in columns:
-        table.add_column(column)
+    table = Texttable()
+    table.header( ['Account Number','First Name', 'Last Name', 'PIN','Balance'])
+    # for column in columns:
+    #     table.add_column(column)
     for user in current_user:
-        table.add_row(*user,style='bright_green')
-
-    console = Console()
-    console.print(table)
+        table.add_row(user)
+    # table.add_row(current_user[0])
+    # console = Console()
+    # console.print(table)
+    print(table.draw())
 
 
 user = validate__acc_num()
