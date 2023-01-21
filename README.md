@@ -1,31 +1,33 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Abc ATM - Banking System
+- [INTRODUCTION](#introduction)
+- [USER EXPERIENCE UX](#user-experience-ux)
+- [STRUCTURE](#structure)
+- [SCOPE](#scope)
+- [FLOWCHART](#flowchart)
+- [FEATURES](#features)
+  + [EXISTING FEATURES](#existing-features)
+  + [FUTURE FEATURES](#future-features)
+- [BUGS OR ERRORS](#bugs-or-errors)
+- [TESTING](#testing)
+- [DEPLOYMENT](#deployment)
+- [CREDITS](#credits)
+- [ACKNOWLEDGEMENTS](#acknowledgements)
 
-Welcome Dee68,
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
+## INTRODUCTION
+The Abc ATM Banking System is a fictional ATM that combines the partial functionality of a bank and an ATM. The system simulates the creation of a bank account, validates a customer or client account number with a four digit pin and enables logged in customer to deposit or withdraw money. It also displays customer account details and transaction information on a table.
 
-## Reminders
 
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
 
-## Creating the Heroku app
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
 
-1. `heroku/python`
-2. `heroku/nodejs`
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
 
-Connect your GitHub repository and deploy as normal.
 
-## Constraints
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
 
------
-Happy coding!
+
+
+
+  

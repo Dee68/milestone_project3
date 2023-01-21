@@ -33,7 +33,7 @@ def word_wrap(words):
 
 def show_menu():
     """ Displays the menu to a user """
-    word_wrap(f"""{Fore.YELLOW}
+    word_wrap(f"""{Fore.CYAN}
         |====================================================|
         |                                                    |
         |     WELCOME TO ABC ATM BANKING SYSTEM              |
