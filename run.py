@@ -2,13 +2,15 @@ import datetime
 import sys
 import time
 from random import randint
+from accounts import Account as account
 from texttable import Texttable
 # from rich.table import Table
 # from rich.console import Console
 import gspread
 from google.oauth2.service_account import Credentials
+import colorama
 from colorama import Fore
-from accounts import Account as account
+colorama.init()
 
 
 SCOPE = [
@@ -36,18 +38,35 @@ def show_menu():
     word_wrap(f"""{Fore.CYAN}
         |====================================================|
         |                                                    |
-        |     WELCOME TO ABC ATM BANKING SYSTEM              |
+        |        WELCOME TO ABC ATM BANKING SYSTEM           |
         |                                                    |
         |   Please choose one of the following options:      |
         |                                                    |
-        |     1. Create an account                           |
-        |     2. Enter a deposit to account                  |
-        |     3. Withdraw from account                       |
-        |     4. Show account details                        |
-        |     5. Show Transactions                           | 
-        |     6. Exit                                        |    
+        |        1. ENTER DEPOSIT TO ACCOUNT                 |
+        |        2. WITHDRAW FROM ACCOUNT                    |
+        |        3. SHOW ACCOUNT DETAILS                     |
+        |        4. SHOW TRANSACTIONS                        |
+        |        5. EXIT                                     | 
+        |                                                    |    
         |====================================================|""")
     print("\n\n")
+    option = int(input("\033[1m" +f"""{Fore.WHITE}Enter option(1-5): """))
+    return option
+
+
+def welcome_message():
+    """ Asks user if user is a customer or not """
+    while True:
+        abc_user = input("\033[1m" + f"""{Fore.WHITE}    Do you have an account with us ?(YES/NO): """)
+        if abc_user.strip().lower()[0] == 'y':
+            break  
+        elif abc_user.strip().lower()[0] == 'n':
+            break
+        else:
+            print("\n")
+            print(f"""{Fore.RED}    You are required to answer only: yes or no.\n\n""")
+
+    return abc_user
 
 
 def create_user():
@@ -288,54 +307,27 @@ def transcript_receipt(account):
 
 def main():
     """ Run all functions of program. Controls the flow of the system """
-    # show something before menu of options
+    word_wrap(f"""{Fore.CYAN}
+        =================================================
+        |             WELCOME TO ABC ATM                 |
+        ++++++++++++++++++++++++++++++++++++++++++++++++++""")
+    print("\n\n")
+    new_user = welcome_message()
+    if new_user.strip().lower()[0] == 'y':
+        show_menu()
+    elif new_user.strip().lower()[0] == 'n':
+        create_user()
+
     
-    start = True
-    while start:
-        # show_menu()
-        option = int(input("Enter option: "))
-        if option == 1:
-            #create user
-            create_user()
-            start = False
-            break
-        if option == 2:
-            account_holder = validate__acc_num()
-            if validate_pin(account_holder):
-                deposit(account_holder)
-                start = False
-                break
-        if option == 3:
-            account_holder = validate__acc_num()
-            if validate_pin(account_holder):
-                withdraw(account_holder)
-                start = False
-                break
-        if option == 4:
-            account_holder = validate__acc_num()
-            if validate_pin(account_holder):
-                display_account_details(account_holder)
-                start = False
-                break
-        if option == 5:
-            account_holder = validate__acc_num()
-            if validate_pin(account_holder):
-                transcript_receipt(account_holder)
-                start = False
-                break
-        if option == 6:
-            print("Thank you for using our services.")
-            sys.exit()
-        else:
-            print("Invalid option, please try again")
-    show_menu()
+    
+   
 
-
-show_menu()
-user = validate__acc_num()
-validate_pin(user)
+# p = show_menu()
+# print(p)
+# user = validate__acc_num()
+# validate_pin(user)
 # withdraw(user)
 # # display_account_details(user)
-transcript_receipt(user)
+# transcript_receipt(user)
 
-# main()
+main()
