@@ -36,11 +36,11 @@ def word_wrap(words):
 def ask_to_continue():
     """ Asks user to continue or exit system. """
     while True:
-            choice = input("Do you wish to continue or quit?(C/E): ")
-            if choice.strip().lower()[0] == 'c':
+            choice = input("Do you wish to continue or exit?(C/E): ")
+            if not choice == "" and choice.strip().lower()[0] == 'c':
                 controller()
                 break
-            elif choice.strip().lower()[0] == 'e':
+            elif not choice == "" and choice.strip().lower()[0] == 'e':
                 sys.exit()
                 break
             else:
@@ -95,7 +95,7 @@ def create_user():
     time.sleep(2)
     print("\n\n")
     word_wrap(f"""    ============= ACCOUNT CREATION =============
-    |========================================|\n\n""")
+    |===========================================|\n\n""")
     user_account = []
     _acc_num = "ac" + str(randint(10000000000000,99999999999999))
     user_account.append(_acc_num)
@@ -312,7 +312,8 @@ def transcript_receipt(account):
     transactions = SHEET.worksheet('transaction').get_all_values()[1:]
     user_transacts = [transact for transact in transactions if account._acc_num == transact[1]]
     if len(user_transacts) == 0:
-        word_wrap(f"""{Fore.MAGENTA}You've no transactions done yet\n""")
+        word_wrap(f"""{Fore.CYAN}    You've no transactions done yet\n""")
+        ask_to_continue()
     else:
         table = Texttable()
         table.header(['TransactionId', 'AccountId', 'Date & Time', 'Status', 'Amount'])
@@ -356,7 +357,8 @@ def controller():
                     ask_to_continue() 
     elif new_user.strip().lower()[0] == 'n':
         create_user()
-        ask_to_continue()
+        show_menu()
+        controller()
     else:
         print(f"Invalid iput to a yes/no question!\n")
 
@@ -364,7 +366,7 @@ def controller():
 
 def main():
     """ Run all functions of program. Controls the flow of the system """
-    pass
+    controller()
 
     
     
