@@ -33,6 +33,20 @@ def word_wrap(words):
         time.sleep(0.05)
 
 
+def ask_to_continue():
+    """ Asks user to continue or exit system. """
+    while True:
+            choice = input("Do you wish to continue or quit?(C/E): ")
+            if choice.strip().lower()[0] == 'c':
+                controller()
+                break
+            elif choice.strip().lower()[0] == 'e':
+                sys.exit()
+                break
+            else:
+                print("Enter only continue or exit!!!\n")
+
+
 def show_menu():
     """ Displays the menu to a user """
     word_wrap(f"""{Fore.CYAN}
@@ -50,14 +64,18 @@ def show_menu():
         |                                                    |    
         |====================================================|""")
     print("\n\n")
-    option = int(input("\033[1m" +f"""{Fore.WHITE}Enter option(1-5): """))
+    option = int(input("\033[1m" +f"""{Fore.WHITE}    Enter option(1-5): """))
+    print("\n\n")
     return option
 
 
 def welcome_message():
     """ Asks user if user is a customer or not """
     while True:
-        abc_user = input("\033[1m" + f"""{Fore.WHITE}    Do you have an account with us ?(YES/NO): """)
+        try:
+            abc_user = input("\033[1m" + f"""\n{Fore.WHITE}    Do you have an account with us ?(YES/NO):  """)
+        except EOFError:
+            break
         if abc_user.strip().lower()[0] == 'y':
             break  
         elif abc_user.strip().lower()[0] == 'n':
@@ -74,6 +92,10 @@ def create_user():
     Collects user input, validate input values and creates an account for user.
     Returns an account object.
     """
+    time.sleep(2)
+    print("\n\n")
+    word_wrap(f"""    ============= ACCOUNT CREATION =============
+    |========================================|\n\n""")
     user_account = []
     _acc_num = "ac" + str(randint(10000000000000,99999999999999))
     user_account.append(_acc_num)
@@ -129,6 +151,8 @@ def validate__acc_num():
         and terminates after 3 unsuccessfull attempts.
         Returns false on failure or returns account object on success.
     """
+    print("\n\n")
+    word_wrap(f"""    ============== ACCOUNT VALIDATION ==============\n\n""")
     account_holders = SHEET.worksheet('accounts').get_all_values()[1:]
     tries = 0
     while tries < 3:
@@ -142,11 +166,10 @@ def validate__acc_num():
             break
     else:
         print(f"""{Fore.RED}    You have exceeded trial limit, please create an account.\n\n""")
-        print(f"""{Fore.GREEN}    Thank you for using our services.\n""")
+        print(f"""{Fore.GREEN}    Thank you for using our services.\n\n""")
+        ask_to_continue()
         time.sleep(2)
         return False
-        # show_menu()
-        # sys.exit()
     time.sleep(3)
     print(f"""{Fore.GREEN}    Checking validity of card ...\n""")
     word_wrap(f"""    Account valid proceed to enter PIN ...\n\n""")
@@ -164,6 +187,8 @@ def validate_pin(account_holder):
         and terminates after 3 unsuccessfull attempts.
         Returns false or true.
     """
+    print("\n\n")
+    word_wrap(f"""{Fore.GREEN}    =========== PIN VALIDATION ============\n\n""")
     tries = 0
     while tries < 3:
         tries += 1
@@ -178,8 +203,6 @@ def validate_pin(account_holder):
         print(f"""{Fore.YELLOW}   You have exceeded trial limit, please contact bank officials by phone.\n\n""")
         print(f"""{Fore.GREEN}    Thank you for using our services.\n""")
         return False
-    # show menu for user 
-    # show_menu() 
     return True
 
 
@@ -189,7 +212,7 @@ def deposit(account):
         after 3 unsuccessfull attempts.
      """
     transact = []
-    trans_id = "D"+str(randint(0,101))+str(int(datetime.datetime.now().timestamp()))
+    trans_id = "D"+str(randint(0, 101))+str(int(datetime.datetime.now().timestamp()))
     transact.append(trans_id)
     transact.append(account._acc_num)
     transact.append(datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S"))
@@ -211,8 +234,6 @@ def deposit(account):
     else:
         print(f"""{Fore.YELLOW}    Sorry you've reached your trial limit.\n""")
         print(f"""    Consult bank officials by phone for further instructions.\n""")
-        #show_menu
-        # show_menu()
     if not amount.isnumeric():
         new_balance = float(account.get_balance())
     else:
@@ -228,12 +249,13 @@ def deposit(account):
         transact.append('FAILURE')       
     transact.append(amount)
     SHEET.worksheet('transaction').append_row(transact)
+    return status
 
 
 def withdraw(account):
     """ withdraws amount of money from account
         if availabe or shows corresponding error,
-        and updates the transaction worksheet.
+        and updates the transaction worksheet, returns status.
     """
     transact = []
     trans_id = "W"+str(randint(0, 101))+str(int(datetime.datetime.now().timestamp()))
@@ -268,7 +290,8 @@ def withdraw(account):
     camount = "-" + str(amount)       
     transact.append(camount)
     SHEET.worksheet('transaction').append_row(transact)
-    # show_menu()
+    return status
+    
 
 
 def display_account_details(account):
@@ -277,14 +300,11 @@ def display_account_details(account):
     current_user = [holder for holder in account_holders if account._acc_num == holder[0]]
     table = Texttable()
     table.header( ['Account Number','First Name', 'Last Name', 'PIN','Balance'])
-    # for column in columns:
-    #     table.add_column(column)
     for user in current_user:
         table.add_row(user)
-    # table.add_row(current_user[0])
-    # console = Console()
-    # console.print(table)
     print(table.draw())
+    print("\n\n")
+    ask_to_continue()
 
 
 def transcript_receipt(account):
@@ -303,20 +323,48 @@ def transcript_receipt(account):
                 transcript[4] += ' Invalid input'
             table.add_row(transcript)
         print(table.draw())
+        print("\n\n")
+        ask_to_continue()
+
+
+
+def controller():
+    """ Controls the functions sequesnces"""
+    new_user = welcome_message()
+    if new_user.strip().lower()[0] == 'y':
+        # validate user
+        abc_user = validate__acc_num()
+        if abc_user:
+            if validate_pin(abc_user):
+                p = show_menu()
+                if p == 1:
+                    time.sleep(3)
+                    deposit(abc_user)
+                elif p == 2:
+                    time.sleep(3)
+                    withdraw(abc_user)
+                elif p == 3:
+                    time.sleep(3)
+                    display_account_details(abc_user)
+                elif p == 4:
+                    time.sleep(3)
+                    transcript_receipt(abc_user)
+                elif p == 5:
+                    sys.exit()
+                else:
+                    print(f"Unknown option, please follow the instructions.\n")
+                    ask_to_continue() 
+    elif new_user.strip().lower()[0] == 'n':
+        create_user()
+        ask_to_continue()
+    else:
+        print(f"Invalid iput to a yes/no question!\n")
+
 
 
 def main():
     """ Run all functions of program. Controls the flow of the system """
-    word_wrap(f"""{Fore.CYAN}
-        =================================================
-        |             WELCOME TO ABC ATM                 |
-        ++++++++++++++++++++++++++++++++++++++++++++++++++""")
-    print("\n\n")
-    new_user = welcome_message()
-    if new_user.strip().lower()[0] == 'y':
-        show_menu()
-    elif new_user.strip().lower()[0] == 'n':
-        create_user()
+    pass
 
     
     
@@ -330,4 +378,9 @@ def main():
 # # display_account_details(user)
 # transcript_receipt(user)
 
+word_wrap(f"""{Fore.CYAN}
+        =================================================
+        |             WELCOME TO ABC ATM                 |
+        ++++++++++++++++++++++++++++++++++++++++++++++++++""")
+print("\n\n")
 main()
