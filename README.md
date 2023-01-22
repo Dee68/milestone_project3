@@ -18,6 +18,8 @@
 ## INTRODUCTION
 The Abc ATM Banking System is a fictional ATM that combines the partial functionality of a bank and an ATM. The system simulates the creation of a bank account, validates a customer or client account number with a four digit pin and enables logged in customer to deposit or withdraw money. It also displays customer account details and transaction information on a table.
 
+![alt-text](assets/images/readme/start.png)
+
 [The live project can be viewed here](https://natty-congo.herokuapp.com/)
 
 
