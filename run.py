@@ -36,15 +36,15 @@ def word_wrap(words):
 def ask_to_continue():
     """ Asks user to continue or exit system. """
     while True:
-            choice = input("Do you wish to continue or exit?(C/E): ")
-            if not choice == "" and choice.strip().lower()[0] == 'c':
+            choice = input(f"""    Do you wish to continue?(Y/N): """)
+            if not choice == "" and choice.strip().lower()[0] == 'y':
                 controller()
                 break
-            elif not choice == "" and choice.strip().lower()[0] == 'e':
+            elif not choice == "" and choice.strip().lower()[0] == 'n':
                 sys.exit()
                 break
             else:
-                print("Enter only continue or exit!!!\n")
+                print("Enter only yes or no!!!\n")
 
 
 def show_menu():
@@ -112,7 +112,7 @@ def create_user():
         f_name = input("\033[1m" + f"""{Fore.WHITE}    Enter first name: """)
         print("\n")
         if not f_name.isalpha():
-            print(f"""{Fore.RED}!    Only alphabets allowed {f_name}, please try again\n""")
+            print(f"""{Fore.RED}    !Only alphabets allowed {f_name}, please try again\n""")
         elif len(f_name) < 2 or len(f_name) > 20:
             print(f"""{Fore.RED}    !Only 2 to 20 letters allowed - {f_name}, please try again\n""")
         else:
@@ -210,7 +210,6 @@ def validate_pin(account_holder):
             print(f"{Fore.RED}    !Pin code is not correct - {code}.\n")  
     else:
         print(f"""{Fore.YELLOW}   You have exceeded trial limit, please contact bank officials by phone.\n\n""")
-        print(f"""{Fore.GREEN}    Thank you for using our services.\n""")
         return False
     return True
 
@@ -361,13 +360,14 @@ def controller():
                     time.sleep(3)
                     transcript_receipt(abc_user)
                 elif p == 5:
+                    print(f"""{Fore.GREEN}    Thank you for using our services.\n""")
                     sys.exit()
                 else:
                     # print(f"Unknown option, please follow the instructions.\n")
                     ask_to_continue() 
     if new_user.strip().lower()[0] == 'n':
         create_user()
-        show_menu()
+        # show_menu()
         controller()
 
 
@@ -384,7 +384,7 @@ if __name__ == "__main__":
         ▒█░░▒█ ▒█▀▀▀ ▒█░░░ ▒█▀▀█ ▒█▀▀▀█ ▒█▀▄▀█ ▒█▀▀▀ 　 ▀▀█▀▀ ▒█▀▀▀█ 
         ▒█▒█▒█ ▒█▀▀▀ ▒█░░░ ▒█░░░ ▒█░░▒█ ▒█▒█▒█ ▒█▀▀▀ 　 ░▒█░░ ▒█░░▒█ 
         ▒█▄▀▄█ ▒█▄▄▄ ▒█▄▄█ ▒█▄▄█ ▒█▄▄▄█ ▒█░░▒█ ▒█▄▄▄ 　 ░▒█░░ ▒█▄▄▄█                      
-                                                                              
+                                                                          
         ░█▀▀█ █▀▀▄ █▀▀ 　 　 ░█▀▀█ ▀▀█▀▀ ▒█▀▄▀█ 
         ▒█▄▄█ █▀▀▄ █░░ 　 　 ▒█▄▄█ ░▒█░░ ▒█▒█▒█ 
         ▒█░▒█ ▀▀▀░ ▀▀▀ 　 　 ▒█░▒█ ░▒█░░ ▒█░░▒█     

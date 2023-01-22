@@ -51,6 +51,65 @@ The Flowchart for my program was created using [LucidChart](https://www.lucidcha
 
 ![alt-text](assets/images/readme/flowchart.png)
 
+## FEATURES
+### EXISTING FEATURES
+For simulating a real-life experience, the system is linked to a <b>Google Spreedsheet</b> that can be accessed [here](https://docs.google.com/spreadsheets/d/19-2VbDweehojeCg4YcLQOBKUNskHD-2ef7-phK18IgQ/edit?usp=sharing).
+
+
+### FUTURE FEATURES
+
+
+### BUGS OR ERRORS
+
+
+
+## DEPLOYMENT
+- This site was deployed by completing the following steps:
+1. Log in to [Heroku](https://id.heroku.com/) or create an account
+2. On the main page click the button labelled New in the top right corner and from the drop-down menu   select Create New App
+3. You must enter a unique app name
+4. Next select your region
+5. Click on the Create App button
+6. The next page is the project’s Deploy Tab. Click on the Settings Tab and scroll down to Config Vars
+7. Click Reveal Config Vars and enter port into the Key box and 8000 into the Value box and click the Add button
+8. Click Reveal Config Vars again and enter CREDS into the Key box and the Google credentials into the Value box
+9. Next, scroll down to the Buildpack section click Add Buildpack select python and click Save Changes
+10. Repeat step 9 to add node.js. o Note: The Buildpacks must be in the correct order. If not click and drag them to move into the correct order
+11. Scroll to the top of the page and choose the Deploy tab
+12. Select Github as the deployment method
+13. Confirm you want to connect to GitHub
+14. Search for the repository name and click the connect button
+15. Scroll to the bottom of the deploy page and select the preferred deployment type
+16. Click either Enable Automatic Deploys for automatic deployment when you push updates to Github
+
+### FORKING 
+Fork this project by following the steps:
+1. Open [GitHub](https://github.com/)
+2. Click on the project to be forked
+3. Find the Fork button at the top right of the page
+4. Once you click the button the fork will be in your repository
+
+### CLONING
+Clone this project by following the steps:
+1. Open [GitHub](https://github.com/)
+2. On the [repository](https://github.com/Dee68/milestone_project3) click the Code green button, right above the code window
+3. You will be provided with three options to choose from, HTTPS, SSH, or GitHub CLI, click the clipboard icon in order to copy the URL
+4. In your IDE open Git Bash
+5. Enter the command git clone followed by the copied URL
+6. The project is cloned.
+
+## CREDITS
+- The code for linking to the Google Spreadsheet and manipulating it was taken and adapted from the Code Institute Love Sandwiches tutorial
+- The welcome message on the start of the programm was adapted from [ASCII Art generator](https://fsymbols.com/generators/carty/)
+- The word_wrap function for animating the text was adapted from [Animated text tutorial](https://www.youtube.com/watch?v=2h8e0tXHfk0)
+
+
+
+## ACKNOWLEDGEMENTS
+
+
+
+
 
 
 
