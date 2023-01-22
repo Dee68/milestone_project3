@@ -65,7 +65,7 @@ def show_menu():
         |        5. EXIT                                     | 
         |                                                    |    
         |====================================================|""")
-    print("\n\n")
+    print("\n")
     while True:
         try:
             option = input("\033[1m" + f"""{Fore.WHITE}    Enter option(1-5): """)
@@ -85,13 +85,14 @@ def welcome_message():
     while True:
         try:
             abc_user = input("\033[1m" + f"""\n{Fore.WHITE}    Do you have an account with us ?(YES/NO):  """)
-            if not abc_user.strip().lower()[0] == 'y' or not abc_user.strip().lower()[0] == 'n':
-                raise Exception(f"You are required to answer only: yes or no-{abc_user}")
-            break
-        except Exception as e_rr:
+            pos_a = abc_user.strip().lower()[0]
+            if pos_a in ('y', 'n'):
+                break
+            raise ValueError(f"You are required to answer only: yes or no - {abc_user}")
+        except ValueError as e_rr:
             print("\n")
-            print(f"""{Fore.RED}    {e_rr}.\n\n""")
-
+            print(f"""{Fore.RED}   {e_rr}.\n\n""")
+        
     return abc_user
 
 
@@ -332,7 +333,7 @@ def transcript_receipt(account):
             elif not transcript[4][-1].isnumeric():
                 transcript[4] += ' Invalid input'
             table.add_row(transcript)
-        print("YOUR TRANSACTIONS\n")
+        print(f"{account.get_first_name()} {account.get_last_name()}: YOUR TRANSACTIONS\n")
         print(table.draw())
         print("\n\n")
         ask_to_continue()
