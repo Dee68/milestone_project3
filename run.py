@@ -64,9 +64,16 @@ def show_menu():
         |                                                    |    
         |====================================================|""")
     print("\n\n")
-    option = int(input("\033[1m" +f"""{Fore.WHITE}    Enter option(1-5): """))
-    print("\n\n")
-    return option
+    while True:
+        try:
+            option = input("\033[1m" + f"""{Fore.WHITE}    Enter option(1-5): """)
+            print("\n\n")
+            if not option.isnumeric() and option not in [1, 2, 3, 4, 5]:
+                raise ValueError(f"Invalid input, please follow the instructions: {option}.")
+            break
+        except ValueError as e_rr:
+            print(f"""{Fore.RED}    {e_rr}\n\n""")
+    return int(option)
 
 
 def welcome_message():
@@ -171,7 +178,7 @@ def validate__acc_num():
         time.sleep(2)
         return False
     time.sleep(3)
-    print(f"""{Fore.GREEN}    Checking validity of card ...\n""")
+    print(f"""{Fore.GREEN}    Checking validity of account ...\n""")
     word_wrap(f"""    Account valid proceed to enter PIN ...\n\n""")
     t_1 = current_user[0][0]
     t_2 = current_user[0][1]
@@ -324,10 +331,10 @@ def transcript_receipt(account):
             elif not transcript[4][-1].isnumeric():
                 transcript[4] += ' Invalid input'
             table.add_row(transcript)
+        print("YOUR TRANSACTIONS\n")
         print(table.draw())
         print("\n\n")
         ask_to_continue()
-
 
 
 def controller():
@@ -354,14 +361,13 @@ def controller():
                 elif p == 5:
                     sys.exit()
                 else:
-                    print(f"Unknown option, please follow the instructions.\n")
+                    # print(f"Unknown option, please follow the instructions.\n")
                     ask_to_continue() 
-    elif new_user.strip().lower()[0] == 'n':
+    if new_user.strip().lower()[0] == 'n':
         create_user()
         show_menu()
         controller()
-    else:
-        print(f"Invalid iput to a yes/no question!\n")
+
 
 
 def main():
