@@ -77,7 +77,7 @@ def show_menu():
 
 
 def welcome_message():
-    """ Asks user if user is a customer or not """
+    """ Asks user if user has an account or not """
     while True:
         try:
             abc_user = input("\033[1m" + f"""\n{Fore.WHITE}    Do you have an account with us ?(YES/NO):  """)
