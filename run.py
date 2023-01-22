@@ -212,7 +212,8 @@ def deposit(account):
         after 3 unsuccessfull attempts.
      """
     transact = []
-    trans_id = "D"+str(randint(0, 101))+str(int(datetime.datetime.now().timestamp()))
+    td = str(int(datetime.datetime.now().timestamp()))
+    trans_id = "D" + str(randint(0, 101)) + td
     transact.append(trans_id)
     transact.append(account._acc_num)
     transact.append(datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S"))
@@ -363,26 +364,15 @@ def controller():
         print(f"Invalid iput to a yes/no question!\n")
 
 
-
 def main():
     """ Run all functions of program. Controls the flow of the system """
     controller()
 
-    
-    
-   
 
-# p = show_menu()
-# print(p)
-# user = validate__acc_num()
-# validate_pin(user)
-# withdraw(user)
-# # display_account_details(user)
-# transcript_receipt(user)
-
-word_wrap(f"""{Fore.CYAN}
-        =================================================
-        |             WELCOME TO ABC ATM                 |
-        ++++++++++++++++++++++++++++++++++++++++++++++++++""")
-print("\n\n")
-main()
+if __name__ == "__main__":
+    word_wrap(f"""{Fore.CYAN}
+            =================================================
+            |             WELCOME TO ABC ATM                 |
+            ++++++++++++++++++++++++++++++++++++++++++++++++++""")
+    print("\n\n")
+    main()
