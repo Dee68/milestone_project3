@@ -48,7 +48,9 @@ def ask_to_continue():
 
 
 def show_menu():
-    """ Displays the menu to a user """
+    """ Displays the menu to a user and takes in option input,
+        validates it and return an integer of it.
+    """
     word_wrap(f"""{Fore.CYAN}
         |====================================================|
         |                                                    |
@@ -77,19 +79,18 @@ def show_menu():
 
 
 def welcome_message():
-    """ Asks user if user has an account or not """
+    """ Asks user if user has an account or not and
+        returns first letter of user input.
+     """
     while True:
         try:
             abc_user = input("\033[1m" + f"""\n{Fore.WHITE}    Do you have an account with us ?(YES/NO):  """)
-        except EOFError:
+            if not abc_user.strip().lower()[0] == 'y' or not abc_user.strip().lower()[0] == 'n':
+                raise Exception(f"You are required to answer only: yes or no-{abc_user}")
             break
-        if abc_user.strip().lower()[0] == 'y':
-            break  
-        elif abc_user.strip().lower()[0] == 'n':
-            break
-        else:
+        except Exception as e_rr:
             print("\n")
-            print(f"""{Fore.RED}    You are required to answer only: yes or no.\n\n""")
+            print(f"""{Fore.RED}    {e_rr}.\n\n""")
 
     return abc_user
 
