@@ -1,6 +1,7 @@
 import datetime
 import sys
 import time
+import re
 from random import randint
 from accounts import Account as account
 from texttable import Texttable
@@ -30,21 +31,29 @@ def word_wrap(words):
     for c in words:
         sys.stdout.write(c)
         sys.stdout.flush()
-        time.sleep(0.05)
+        time.sleep(0.01)
 
 
-def ask_to_continue():
+def ask_to_continue(current_user):
     """ Asks user to continue or exit system. """
     while True:
             choice = input(f"""    Do you wish to continue?(Y/N): """)
-            if not choice == "" and choice.strip().lower()[0] == 'y':
-                controller()
-                break
-            elif not choice == "" and choice.strip().lower()[0] == 'n':
+            if choice and choice.strip().lower()[0] == 'y':
+                # abc_user = validate__acc_num()
+                if current_user:
+                    p = show_menu()
+                    do_options(p, current_user)
+                    break
+                else:
+                    p = controller()
+                    break
+            elif choice and choice.strip().lower()[0] == 'n':
+                print(f"""{Fore.GREEN}    \n\nTHANK YOU FOR USING OUR SERVICES.""")
                 sys.exit()
                 break
             else:
                 print("Enter only yes or no!!!\n")
+                
 
 
 def show_menu():
@@ -112,7 +121,9 @@ def create_user():
         f_name = input("\033[1m" + f"""{Fore.WHITE}    Enter first name: """)
         print("\n")
         if not f_name.isalpha():
-            print(f"""{Fore.RED}    !Only alphabets allowed {f_name}, please try again\n""")
+            print(f"""{Fore.RED}    !Numbers,spaces and other characters not allowed {f_name}, please try again\n""")
+        # elif not re.match(r'^[a-zA-Z]+$', f_name):
+        #     print(f"""{Fore.RED}    !spaces and other characters not allowed {f_name}, please try again\n""")
         elif len(f_name) < 2 or len(f_name) > 20:
             print(f"""{Fore.RED}    !Only 2 to 20 letters allowed - {f_name}, please try again\n""")
         else:
@@ -121,7 +132,7 @@ def create_user():
         l_name = input("\033[1m" + f"""{Fore.WHITE}    Enter last name: """)
         print("\n")
         if not l_name.isalpha():
-            print(f"""{Fore.RED}    !Only alphabets allowed {l_name}, please try again\n""")
+            print(f"""{Fore.RED}    !Numbers,spaces and other characters not allowed {l_name}, please try again\n""")
         elif len(l_name) < 2 or len(l_name) > 20:
             print(f"""{Fore.RED}    !Only 2 to 20 letters allowed- {l_name}, please try again\n""")
         else:
@@ -313,7 +324,7 @@ def display_account_details(account):
         table.add_row(user)
     print(table.draw())
     print("\n\n")
-    ask_to_continue()
+    ask_to_continue(account)
 
 
 def transcript_receipt(account):
@@ -322,7 +333,7 @@ def transcript_receipt(account):
     user_transacts = [transact for transact in transactions if account._acc_num == transact[1]]
     if len(user_transacts) == 0:
         word_wrap(f"""{Fore.CYAN}    You've no transactions done yet\n""")
-        ask_to_continue()
+        ask_to_continue(account)
     else:
         table = Texttable()
         table.header(['TransactionId', 'AccountId', 'Date & Time', 'Status', 'Amount'])
@@ -335,49 +346,52 @@ def transcript_receipt(account):
         print(f"{account.get_first_name()} {account.get_last_name()}: YOUR TRANSACTIONS\n")
         print(table.draw())
         print("\n\n")
-        ask_to_continue()
+        ask_to_continue(account)
+
+def do_options(p, abc_user):
+    """ implements different operational functions depending on the value of p"""
+    if p == 1:
+        time.sleep(3)
+        deposit(abc_user)
+        ask_to_continue(abc_user)
+        print(chr(27) + "[2J")
+    elif p == 2:
+        time.sleep(3)
+        withdraw(abc_user)
+        ask_to_continue(abc_user)
+        print(chr(27) + "[2J")
+    elif p == 3:
+        time.sleep(3)
+        display_account_details(abc_user)
+        print(chr(27) + "[2J")
+    elif p == 4:
+        time.sleep(3)
+        transcript_receipt(abc_user)
+        print(chr(27) + "[2J")
+    elif p == 5:
+        print(f"""{Fore.GREEN}    Thank you for using our services.\n""")
+        sys.exit()
+    else:
+        ask_to_continue(abc_user) 
 
 
 def controller():
     """ Controls the functions sequesnces"""
     new_user = welcome_message()
     if new_user.strip().lower()[0] == 'y':
-        # validate user
         abc_user = validate__acc_num()
-        print(chr(27) + "[2J")
+        # print(chr(27) + "[2J")
         if abc_user:
             if validate_pin(abc_user):
                 p = show_menu()
-                print(chr(27) + "[2J")
-                if p == 1:
-                    time.sleep(3)
-                    deposit(abc_user)
-                    ask_to_continue()
-                    print(chr(27) + "[2J")
-                elif p == 2:
-                    time.sleep(3)
-                    withdraw(abc_user)
-                    ask_to_continue()
-                    print(chr(27) + "[2J")
-                elif p == 3:
-                    time.sleep(3)
-                    display_account_details(abc_user)
-                    print(chr(27) + "[2J")
-                elif p == 4:
-                    time.sleep(3)
-                    transcript_receipt(abc_user)
-                    print(chr(27) + "[2J")
-                elif p == 5:
-                    print(f"""{Fore.GREEN}    Thank you for using our services.\n""")
-                    sys.exit()
-                else:
-                    ask_to_continue() 
+                # print(chr(27) + "[2J")
+                do_options(p, abc_user)
             else:
                 print(chr(27) + "[2J")
                 print(f"""{Fore.CYAN}   Please contact the bank officials for assistance.""")
-                ask_to_continue()
+                sys.exit()
         else:
-            ask_to_continue()
+            sys.exit()
     if new_user.strip().lower()[0] == 'n':
         create_user()
         # show_menu()
