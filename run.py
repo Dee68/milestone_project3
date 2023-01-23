@@ -258,7 +258,6 @@ def deposit(account):
         transact.append('FAILURE')       
     transact.append(amount)
     SHEET.worksheet('transaction').append_row(transact)
-    ask_to_continue()
     return status
 
 
@@ -300,7 +299,6 @@ def withdraw(account):
     camount = "-" + str(amount)       
     transact.append(camount)
     SHEET.worksheet('transaction').append_row(transact)
-    ask_to_continue()
     return status
     
 
@@ -354,13 +352,13 @@ def controller():
                 if p == 1:
                     time.sleep(3)
                     deposit(abc_user)
+                    ask_to_continue()
                     print(chr(27) + "[2J")
-                    # ask_to_continue()
                 elif p == 2:
                     time.sleep(3)
                     withdraw(abc_user)
+                    ask_to_continue()
                     print(chr(27) + "[2J")
-                    # ask_to_continue()
                 elif p == 3:
                     time.sleep(3)
                     display_account_details(abc_user)
@@ -373,8 +371,13 @@ def controller():
                     print(f"""{Fore.GREEN}    Thank you for using our services.\n""")
                     sys.exit()
                 else:
-                    # print(f"Unknown option, please follow the instructions.\n")
                     ask_to_continue() 
+            else:
+                print(chr(27) + "[2J")
+                print(f"""{Fore.CYAN}   Please contact the bank officials for assistance.""")
+                ask_to_continue()
+        else:
+            ask_to_continue()
     if new_user.strip().lower()[0] == 'n':
         create_user()
         # show_menu()
