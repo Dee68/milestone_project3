@@ -258,6 +258,7 @@ def deposit(account):
         transact.append('FAILURE')       
     transact.append(amount)
     SHEET.worksheet('transaction').append_row(transact)
+    ask_to_continue()
     return status
 
 
@@ -299,6 +300,7 @@ def withdraw(account):
     camount = "-" + str(amount)       
     transact.append(camount)
     SHEET.worksheet('transaction').append_row(transact)
+    ask_to_continue()
     return status
     
 
@@ -350,9 +352,11 @@ def controller():
                 if p == 1:
                     time.sleep(3)
                     deposit(abc_user)
+                    # ask_to_continue()
                 elif p == 2:
                     time.sleep(3)
                     withdraw(abc_user)
+                    # ask_to_continue()
                 elif p == 3:
                     time.sleep(3)
                     display_account_details(abc_user)
