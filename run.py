@@ -346,23 +346,29 @@ def controller():
     if new_user.strip().lower()[0] == 'y':
         # validate user
         abc_user = validate__acc_num()
+        print(chr(27) + "[2J")
         if abc_user:
             if validate_pin(abc_user):
                 p = show_menu()
+                print(chr(27) + "[2J")
                 if p == 1:
                     time.sleep(3)
                     deposit(abc_user)
+                    print(chr(27) + "[2J")
                     # ask_to_continue()
                 elif p == 2:
                     time.sleep(3)
                     withdraw(abc_user)
+                    print(chr(27) + "[2J")
                     # ask_to_continue()
                 elif p == 3:
                     time.sleep(3)
                     display_account_details(abc_user)
+                    print(chr(27) + "[2J")
                 elif p == 4:
                     time.sleep(3)
                     transcript_receipt(abc_user)
+                    print(chr(27) + "[2J")
                 elif p == 5:
                     print(f"""{Fore.GREEN}    Thank you for using our services.\n""")
                     sys.exit()
