@@ -311,7 +311,6 @@ def withdraw(account):
         transact.append('SUCCESS')
     else:
         transact.append('FAILURE')
-        # transact.append(amount)
     camount = "-" + str(amount)       
     transact.append(camount)
     SHEET.worksheet('transaction').append_row(transact)

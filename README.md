@@ -22,6 +22,8 @@ The Abc ATM Banking System is a fictional ATM that combines the partial function
 [The live project can be viewed here](https://natty-congo.herokuapp.com/)
 
 
+
+
 ## USER EXPERIENCE UX
 ### USER STORIES
 As a developer I want to create:
@@ -92,6 +94,14 @@ If the user is unable to give correct credentials the programm returns back to s
 ![alt-text](assets/images/readme/withdraw.png)
 
 
+### Data sorage
+
+The data used in this project is stored in google sheet through the google api cloud platform
+
+![alt-text](assets/images/readme/accsheet.png)
+
+![alt-text](assets/images/readme/transheet.png)
+
 
 ### FUTURE FEATURES
 - Implement a more modern and secure way to save users credentials
@@ -99,6 +109,9 @@ If the user is unable to give correct credentials the programm returns back to s
 - Implement an email message sender to customers about there current account weekly.
 
 ### BUGS OR ERRORS
+During the development process the desire to give a good experience was placed as the first piority as a result the code to achieve that aim was refactore
+
+### TESTING
 
 
 
@@ -145,6 +158,9 @@ Clone this project by following the steps:
 
 
 ## ACKNOWLEDGEMENTS
+- My mentor for his constructive criticism, his encouragement and inspiring feedbacks.
+- My code institute facilitator Irene for keeping up with my schedules.
+
 
 
 
