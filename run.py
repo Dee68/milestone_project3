@@ -1,7 +1,6 @@
 import datetime
 import sys
 import time
-import re
 from random import randint
 from accounts import Account as account
 from texttable import Texttable
