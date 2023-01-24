@@ -1,8 +1,7 @@
 # Abc ATM - Banking System
 - [INTRODUCTION](#introduction)
 - [USER EXPERIENCE UX](#user-experience-ux)
-- [SCOPE](#scope)
-- [STRUCTURE](#structure)
+  * [USER STORIES](#user-stories)
 - [SCOPE](#scope)
 - [FLOWCHART](#flowchart)
 - [FEATURES](#features)
@@ -45,7 +44,6 @@ For the implementation of the ATM system I have planned the following features:
 - The program displays warnings in all stages if input values are not given in the correct format.
 - On demand a transaction table is displayed to the account holder if any, showing all his/her transactions with date time, amount and status with reasons if status is failure.
 
-## STRUCTURE
 
 
 ### FLOWCHART
@@ -55,11 +53,50 @@ The Flowchart for my program was created using [LucidChart](https://www.lucidcha
 
 ## FEATURES
 ### EXISTING FEATURES
+The programm has a feature that will ease the work of bank workers by not taking the pains of registering every customer.
 For simulating a real-life experience, the system is linked to a <b>Google Spreedsheet</b> that can be accessed [here](https://docs.google.com/spreadsheets/d/19-2VbDweehojeCg4YcLQOBKUNskHD-2ef7-phK18IgQ/edit?usp=sharing).
+
+- When the user launches the programm a welcome image is displayed with a question, if the user has an account or not.
+
+![alt-text](assets/images/readme/start.png)
+- Any input error by the user is caught and the corresponding message is displayed.
+
+![alt-text](assets/images/readme/start_err.png)
+
+- A no answer from the user will prompt the user to create an account.
+
+![alt-text](assets/images/readme/account.png)
+- A yes answer implies the user has an account and the programm will prompt the user for validation of his/credentials thrice.
+If the user is unable to give correct credentials the programm returns back to start welcome question state.
+
+![alt-text](assets/images/readme/acc_valid_err.png)
+
+- If a user successfully logs in to the system, the option menu is displayed to the user.
+
+![alt-text](assets/images/readme/options.png)
+
+- If the user chooses option 3, his/her account details are displayed in a table for the user.
+
+![alt-text](assets/images/readme/account_details.png)
+
+- If the user chooses option 4, his/her transactions are shown on a table with the date time the transactions where made and there status.
+
+![alt-text](assets/images/readme/transactions.png)
+
+- If the user chooses option 1, he/she will be promted to enter the amount in figures to deposit. The transaction will be inserted to the transaction table.
+
+![alt-text](assets/images/readme/depo.png)
+
+- If the user chooses option 2, he/she will be prompted to enter the amount in figures, all errors are caught by the programm and the transaction is inserted into the transaction table.
+
+![alt-text](assets/images/readme/withdraw.png)
+
 
 
 ### FUTURE FEATURES
-
+- Implement a more modern and secure way to save users credentials
+- Enable users to do payment of utilities(water,gas, internet, telephone, etc)
+- Implement an email message sender to customers about there current account weekly.
 
 ### BUGS OR ERRORS
 

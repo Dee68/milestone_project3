@@ -160,7 +160,12 @@ def create_user():
     word_wrap(f"""   {f_name} {l_name} your account has been created successfully.\n\n""")
     print(f"""   Please take note of your Account number and your PIN: \n""")
     word_wrap(f"""   Account Number: {_acc_num}, PIN: {pin_code}.\n""")
-    debit_account_holder = account(user_account[0], user_account[1], user_account[2], user_account[3], user_account[4])
+    a_1 = user_account[0]
+    a_2 = user_account[1]
+    a_3 = user_account[2]
+    a_4 = user_account[3]
+    a_5 = user_account[4]
+    debit_account_holder = account(a_1, a_2, a_3, a_4, a_5)
     SHEET.worksheet('accounts').append_row(user_account)
     return debit_account_holder
 
@@ -184,9 +189,9 @@ def validate__acc_num():
         else:
             break
     else:
-        print(f"""{Fore.RED}    You have exceeded trial limit, please create an account.\n\n""")
+        print(f"""{Fore.RED}    You have exceeded trial limit, please contact the bank create.\n\n""")
         print(f"""{Fore.GREEN}    Thank you for using our services.\n\n""")
-        ask_to_continue()
+        sys.exit()
         time.sleep(2)
         return False
     time.sleep(3)
@@ -220,6 +225,7 @@ def validate_pin(account_holder):
             print(f"{Fore.RED}    !Pin code is not correct - {code}.\n")  
     else:
         print(f"""{Fore.YELLOW}   You have exceeded trial limit, please contact bank officials by phone.\n\n""")
+        sys.exit()
         return False
     return True
 
@@ -353,16 +359,16 @@ def do_options(p, abc_user):
         time.sleep(3)
         deposit(abc_user)
         ask_to_continue(abc_user)
-        print(chr(27) + "[2J")
+        # print(chr(27) + "[2J")
     elif p == 2:
         time.sleep(3)
         withdraw(abc_user)
         ask_to_continue(abc_user)
-        print(chr(27) + "[2J")
+        # print(chr(27) + "[2J")
     elif p == 3:
         time.sleep(3)
         display_account_details(abc_user)
-        print(chr(27) + "[2J")
+        # print(chr(27) + "[2J")
     elif p == 4:
         time.sleep(3)
         transcript_receipt(abc_user)
