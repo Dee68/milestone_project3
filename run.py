@@ -4,8 +4,8 @@ import time
 from random import randint
 from accounts import Account as account
 from texttable import Texttable
-# from rich.table import Table
-# from rich.console import Console
+from rich.table import Table
+from rich.console import Console
 import gspread
 from google.oauth2.service_account import Credentials
 import colorama
