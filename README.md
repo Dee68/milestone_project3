@@ -109,7 +109,7 @@ The data used in this project is stored in google sheet through the google api c
 - Implement an email message sender to customers about there current account weekly.
 
 ### BUGS OR ERRORS
-During the development process the desire to give a good experience was placed as the first piority as a result the code to achieve that aim was refactore
+During the development process the desire to give a good user experience was placed as the first piority as a result the code to achieve that aim was refactored several times. Finally this was achieved by introducing the function (do_options) and validating each user input in the (create_user) function.
 
 ### TESTING
 
@@ -159,7 +159,7 @@ Clone this project by following the steps:
 
 ## ACKNOWLEDGEMENTS
 - My mentor for his constructive criticism, his encouragement and inspiring feedbacks.
-- My code institute facilitator Irene for keeping up with my schedules.
+- My code institute facilitator Irene Neveile for keeping up with my schedules.
 
 
 

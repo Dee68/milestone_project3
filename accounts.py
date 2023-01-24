@@ -11,7 +11,12 @@ class Account:
 
     def __str__(self):
         """ Returns a human readable pattern of the instance."""
-        return f"Account({self._acc_num},{self.first_name},{self.last_name},{self.pin},{self.balance})"
+        p_1 = self._acc_num
+        p_2 = self.first_name
+        p_3 = self.last_name
+        p_4 = self.pin
+        p_5 = self.balance
+        return f"Account({p_1},{p_2},{p_3},{p_4},{p_5})"
 
     # Getter methods
     @property

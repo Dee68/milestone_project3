@@ -34,23 +34,22 @@ def word_wrap(words):
 def ask_to_continue(current_user):
     """ Asks user to continue or exit system. """
     while True:
-            choice = input(f"""    Do you wish to continue?(Y/N): """)
-            if choice and choice.strip().lower()[0] == 'y':
-                # abc_user = validate__acc_num()
-                if current_user:
-                    p = show_menu()
-                    do_options(p, current_user)
-                    break
-                else:
-                    p = controller()
-                    break
-            elif choice and choice.strip().lower()[0] == 'n':
-                print(f"""{Fore.GREEN}    \n\nTHANK YOU FOR USING OUR SERVICES.""")
-                sys.exit()
+        choice = input(f"""    Do you wish to continue?(Y/N): """)
+        if choice and choice.strip().lower()[0] == 'y':
+            if current_user:
+                p = show_menu()
+                do_options(p, current_user)
                 break
             else:
-                print("Enter only yes or no!!!\n")
-                
+                p = controller()
+                break
+        elif choice and choice.strip().lower()[0] == 'n':
+            print(f"""{Fore.GREEN}    \n\nTHANK YOU FOR USING OUR SERVICES.""")
+            sys.exit()
+            break
+        else:
+            print("Enter only yes or no!!!\n")
+
 
 
 def show_menu():
