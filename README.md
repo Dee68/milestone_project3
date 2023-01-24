@@ -7,6 +7,7 @@
 - [FEATURES](#features)
   + [EXISTING FEATURES](#existing-features)
   + [FUTURE FEATURES](#future-features)
+- [DATA STORAGE](#data-sorage)
 - [BUGS OR ERRORS](#bugs-or-errors)
 - [TESTING](#testing)
 - [DEPLOYMENT](#deployment)
@@ -94,7 +95,7 @@ If the user is unable to give correct credentials the programm returns back to s
 ![alt-text](assets/images/readme/withdraw.png)
 
 
-### Data sorage
+## DATA STORAGE
 
 The data used in this project is stored in google sheet through the google api cloud platform
 

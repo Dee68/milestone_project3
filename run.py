@@ -1,5 +1,6 @@
 import datetime
 import sys
+import os
 import time
 from random import randint
 from accounts import Account as account
@@ -22,6 +23,7 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('atm_abc')
 
+width = os.get_terminal_size().columns
 
 def word_wrap(words):
     """ Delays the output of characters on terminal by some milliseconds"""
@@ -34,7 +36,7 @@ def word_wrap(words):
 def ask_to_continue(current_user):
     """ Asks user to continue or exit system. """
     while True:
-        choice = input(f"""    Do you wish to continue?(Y/N): """)
+        choice = input(f"""Do you wish to continue?(Y/N): """.center(width))
         if choice and choice.strip().lower()[0] == 'y':
             if current_user:
                 p = show_menu()
@@ -44,11 +46,11 @@ def ask_to_continue(current_user):
                 p = controller()
                 break
         elif choice and choice.strip().lower()[0] == 'n':
-            print(f"""{Fore.GREEN}    \n\nTHANK YOU FOR USING OUR SERVICES.""")
+            print(f"""{Fore.GREEN}\n\nTHANK YOU FOR USING OUR SERVICES.""".center(width))
             sys.exit()
             break
         else:
-            print("Enter only yes or no!!!\n")
+            print(f"{Fore.RED}Enter only yes or no!!!\n")
 
 
 
@@ -69,7 +71,7 @@ def show_menu():
         |        4. SHOW TRANSACTIONS                        |
         |        5. EXIT                                     | 
         |                                                    |    
-        |====================================================|""")
+        |====================================================|""".center(width))
     print("\n")
     while True:
         try:
@@ -79,7 +81,7 @@ def show_menu():
                 raise ValueError(f"Invalid input, please follow the instructions: {option}.")
             break
         except ValueError as e_rr:
-            print(f"""{Fore.RED}    {e_rr}\n\n""")
+            print(f"""{Fore.RED}{e_rr}\n\n""".center(width))
     return int(option)
 
 
@@ -89,14 +91,14 @@ def welcome_message():
      """
     while True:
         try:
-            abc_user = input("\033[1m" + f"""\n{Fore.WHITE}    Do you have an account with us ?(YES/NO):  """)
+            abc_user = input("\033[1m" + f"""\n{Fore.WHITE}Do you have an account with us ?(YES/NO):  """.center(width))
             pos_a = abc_user.strip().lower()[0]
             if pos_a in ('y', 'n'):
                 break
             raise ValueError(f"You are required to answer only: yes or no - {abc_user}")
         except ValueError as e_rr:
             print("\n")
-            print(f"""{Fore.RED}   {e_rr}.\n\n""")
+            print(f"""{Fore.RED}{e_rr}.\n\n""".center(width))
         
     return abc_user
 
@@ -173,12 +175,12 @@ def validate__acc_num():
         Returns false on failure or returns account object on success.
     """
     print("\n\n")
-    word_wrap(f"""    ============== ACCOUNT VALIDATION ==============\n\n""")
+    word_wrap(f"""============== ACCOUNT VALIDATION ==============\n\n""".center(width))
     account_holders = SHEET.worksheet('accounts').get_all_values()[1:]
     tries = 0
     while tries < 3:
         tries += 1
-        num = input("\033[1m" + f"""{Fore.WHITE}    Enter account number here: """).strip()
+        num = input("\033[1m" + f"""{Fore.WHITE}Enter account number here: """.center(width)).strip()
         print("\n")
         current_user = [holder for holder in account_holders if num == holder[0]]
         if len(current_user) == 0:
