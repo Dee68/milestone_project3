@@ -240,6 +240,7 @@ def deposit(account):
         updates the transaction worksheet and terminates
         after 3 unsuccessfull attempts.
      """
+    word_wrap("========== DEPOSIT OPERATION =============\n\n")
     transact = []
     td = str(int(datetime.datetime.now().timestamp()))
     trans_id = "D" + str(randint(0, 101)) + td
@@ -288,6 +289,7 @@ def withdraw(account):
         if availabe or shows corresponding error,
         and updates the transaction worksheet, returns status.
     """
+    word_wrap("========== WITHDRAWAL OPERATION ==============\n\n")
     transact = []
     trans_id = "W"
     trans_id += str(randint(0, 101))

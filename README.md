@@ -38,7 +38,7 @@ As a general user I want to:
 During this phase of the project design test repositories were created to try out visuals and initial features before establishing the final respository.
 
 ## SCOPE
-For the implementation of the ATM system I have planned the following features:
+For the implementation of the ATM banking system I have planned the following features:
 - Data from spreadsheet that contains users account and transactions to be displayed to user in tables.
 - Account creation starts from the begining of the program, if user has no account.
 - User account will be validated, if correct an option screen will be displayed to user otherwise user will be refered back to create an accoount.
@@ -94,7 +94,7 @@ If the user is unable to give correct credentials the programm returns back to s
 
 - If the user chooses option 2, he/she will be prompted to enter the amount in figures, all errors are caught by the programm and the transaction is inserted into the transaction table.
 
-![alt-text](assets/images/readme/withdraw.png)
+![alt-text](assets/images/readme/withd_er.png)
 
 
 ## DATA STORAGE
