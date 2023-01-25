@@ -68,7 +68,7 @@ def show_menu():
     print("\n")
     while True:
         try:
-            option = input("\033[1m" + f"""{Fore.WHITE}Enter option(1-5): """).strip()
+            option = input(f"""{Fore.WHITE}Enter option(1-5): """).strip()
             print("\n\n")
             if not option:
                 raise ValueError("Enter a value")
