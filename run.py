@@ -85,10 +85,11 @@ def welcome_message():
     while True:
         try:
             print("\n")
-            quest = "Do you have an account with us ?"
-            abc_user = input(f"{Fore.WHITE}{quest}:  ")
-            pos_a = abc_user.strip().lower()[0]
-            if pos_a in ('y', 'n'):
+            abc_user = input("Do you have an account with us?:  ")
+            # pos_a = abc_user.strip().lower()[0]
+            if not abc_user:
+                raise ValueError(f"Enter a value")
+            if abc_user and abc_user[0] in ('y', 'n'):
                 break
             raise ValueError(f"Answer only: yes or no - {abc_user}")
         except ValueError as e_rr:
