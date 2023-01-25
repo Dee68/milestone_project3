@@ -96,6 +96,10 @@ If the user is unable to give correct credentials the programm returns back to s
 
 ![alt-text](assets/images/readme/withd_er.png)
 
+- If input error from the user, the programm also checks the balance of the user if there are sufficient funds and if everything is ok the user is then allowed to withdraw funds consequently with a success message.
+
+![alt-text](assets/images/readme/withd_suc.png)
+
 
 ## DATA STORAGE
 
