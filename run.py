@@ -119,7 +119,8 @@ def create_user():
             print(f"{Fore.RED}!{msg} \n")
             print(f"{Fore.RED}Not allowed,please try again\n")
         elif len(f_name) < 2 or len(f_name) > 20:
-            print(f"{Fore.RED}!Only 2 to 20 letters allowed - {f_name}\n")
+            print(f"{f_name}\n")
+            print(f"{Fore.RED}!Only 2 to 20 letters allowed.\n")
             print(f"{Fore.RED}Please try again\n")
         else:
             break
@@ -133,7 +134,8 @@ def create_user():
             print(f"{Fore.RED}!{msg} \n")
             print(f"{Fore.RED}Not allowed please try again.\n")
         elif len(l_name) < 2 or len(l_name) > 20:
-            print(f"{Fore.RED}!Only 2 to 20 letters allowed- {l_name}\n")
+            print(f"{l_name}\n")
+            print(f"{Fore.RED}!Only 2 to 20 letters allowed\n")
             print(f"{Fore.RED}Please try again\n")
         else:
             break
