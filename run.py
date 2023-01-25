@@ -113,8 +113,11 @@ def create_user():
         f_name = input("\033[1m" + f"""{Fore.WHITE}Enter first name: """)
         print("\n")
         if not f_name.isalpha():
-            msg = "Numbers, spaces and other characters "
-            print(f"{Fore.RED}!{msg} not allowed {f_name}, try again\n")
+            msg1 = "Enter a single name only"
+            msg = "Numbers, spaces and special characters "
+            print(f"{Fore.RED}!{msg1} {f_name}\n")
+            print(f"{Fore.RED}!{msg} \n")
+            print(f"{Fore.RED}Not allowed,please try again\n")
         elif len(f_name) < 2 or len(f_name) > 20:
             print(f"{Fore.RED}!Only 2 to 20 letters allowed - {f_name}\n")
             print(f"{Fore.RED}Please try again\n")
@@ -124,8 +127,11 @@ def create_user():
         l_name = input("\033[1m" + f"""{Fore.WHITE}Enter last name: """)
         print("\n")
         if not l_name.isalpha():
-            msg = "Numbers, spaces and other characters "
-            print(f"{Fore.RED}!{msg} not allowed {l_name}, try again\n")
+            msg1 = "Enter a single name only"
+            msg = "Numbers, spaces and special characters "
+            print(f"{Fore.RED}!{msg1} {l_name}\n")
+            print(f"{Fore.RED}!{msg} \n")
+            print(f"{Fore.RED}Not allowed please try again.\n")
         elif len(l_name) < 2 or len(l_name) > 20:
             print(f"{Fore.RED}!Only 2 to 20 letters allowed- {l_name}\n")
             print(f"{Fore.RED}Please try again\n")
@@ -271,7 +277,7 @@ def deposit(account):
         transact.append('SUCCESS')
         print(f"{Fore.GREEN}Successfully deposited ${str(amount)}.\n")
     else:
-        transact.append('FAILURE')  
+        transact.append('FAILURE')
     transact.append(amount)
     SHEET.worksheet('transaction').append_row(transact)
     return status
@@ -345,7 +351,10 @@ def transcript_receipt(account):
         h_1 = ['TransactionId', 'AccountId', 'Date & Time', 'Status', 'Amount']
         table.header(h_1)
         for transcript in user_transacts:
-            if transcript[4][0] == '-' and transcript[4][1:].isnumeric() and transcript[3] == 'FAILURE':
+            t_1 = transcript[4][0]
+            t_2 = transcript[4][1:]
+            t_3 = transcript[3]
+            if t_1 == '-' and t_2.isnumeric() and t_3 == 'FAILURE':
                 transcript[4] += ' Insufficient fund.'
             elif not transcript[4][-1].isnumeric():
                 transcript[4] += ' Invalid input'
