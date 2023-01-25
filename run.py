@@ -85,10 +85,9 @@ def welcome_message():
     while True:
         try:
             print("\n")
-            abc_user = input("Do you have an account with us?:  ")
-            # pos_a = abc_user.strip().lower()[0]
+            abc_user = input(f"{Fore.WHITE}Do you have an account with us?:  ")
             if not abc_user:
-                raise ValueError(f"Enter a value")
+                raise ValueError("Enter a value")
             if abc_user and abc_user[0] in ('y', 'n'):
                 break
             raise ValueError(f"Answer only: yes or no - {abc_user}")
@@ -105,7 +104,7 @@ def create_user():
     """
     time.sleep(2)
     print("\n\n")
-    word_wrap(f"""    ============= ACCOUNT CREATION =============
+    word_wrap(f"""{Fore.WHITE}    ============= ACCOUNT CREATION =============
     |===========================================|\n\n""")
     user_account = []
     _acc_num = "ac" + str(randint(10000000000000, 99999999999999))
@@ -113,12 +112,15 @@ def create_user():
     while True:
         f_name = input("\033[1m" + f"""{Fore.WHITE}Enter first name: """)
         print("\n")
-        if not f_name.isalpha():
+        if not f_name:
+            print(f"{Fore.RED}{f_name}!Please enter a value\n")
+            print("Try again\n")
+        elif not f_name.isalpha():
             msg1 = "Enter a single name only"
             msg = "Numbers, spaces and special characters "
             print(f"{Fore.RED}!{msg1} {f_name}\n")
-            print(f"{Fore.RED}!{msg} \n")
-            print(f"{Fore.RED}Not allowed,please try again\n")
+            print(f"!{msg} \n")
+            print("Not allowed,please try again\n")
         elif len(f_name) < 2 or len(f_name) > 20:
             print(f"{f_name}\n")
             print(f"{Fore.RED}!Only 2 to 20 letters allowed.\n")
@@ -128,12 +130,15 @@ def create_user():
     while True:
         l_name = input("\033[1m" + f"""{Fore.WHITE}Enter last name: """)
         print("\n")
-        if not l_name.isalpha():
+        if not l_name:
+            print(f"{Fore.RED}{l_name}!Please enter a value\n")
+            print("Try again\n")
+        elif not l_name.isalpha():
             msg1 = "Enter a single name only"
             msg = "Numbers, spaces and special characters "
             print(f"{Fore.RED}!{msg1} {l_name}\n")
-            print(f"{Fore.RED}!{msg} \n")
-            print(f"{Fore.RED}Not allowed please try again.\n")
+            print(f"!{msg} \n")
+            print("Not allowed please try again.\n")
         elif len(l_name) < 2 or len(l_name) > 20:
             print(f"{l_name}\n")
             print(f"{Fore.RED}!Only 2 to 20 letters allowed\n")

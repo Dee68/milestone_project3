@@ -28,7 +28,7 @@ The Abc ATM Banking System is a fictional ATM that combines the partial function
 ## USER EXPERIENCE UX
 ### USER STORIES
 As a developer I want to create:
-* a model of an ATM that will ease clients from the hassle of creating a bank account in addition to its normal functions.
+* a model of an ATM that will ease clients from the hassle of creating a bank account in addition to its normal functions of depositing and withdrawing money.
 
 As a general user I want to:
 1. Easily navigate through the application
@@ -96,7 +96,7 @@ If the user is unable to give correct credentials the programm returns back to s
 
 ![alt-text](assets/images/readme/withd_er.png)
 
-- If input error from the user, the programm also checks the balance of the user if there are sufficient funds and if everything is ok the user is then allowed to withdraw funds consequently with a success message.
+- If there is an input error from the user, the programm also checks the balance of the user if there are sufficient funds and if everything is ok the user is then allowed to withdraw funds consequently with a success message.
 
 ![alt-text](assets/images/readme/withd_suc.png)
 
@@ -169,6 +169,7 @@ Clone this project by following the steps:
 ## ACKNOWLEDGEMENTS
 - My mentor for his constructive criticism, his encouragement and inspiring feedbacks.
 - My code institute facilitator Irene Neveile for keeping up with my schedules.
+- My collegues for their useful suggestions
 
 
 
