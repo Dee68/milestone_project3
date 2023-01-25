@@ -68,13 +68,16 @@ def show_menu():
     print("\n")
     while True:
         try:
-            option = input("\033[1m" + f"""{Fore.WHITE}Enter option(1-5): """)
+            option = input("\033[1m" + f"""{Fore.WHITE}Enter option(1-5): """).strip()
             print("\n\n")
+            if not option:
+                raise ValueError("Enter a value")
             if not option.isnumeric() and option not in [1, 2, 3, 4, 5]:
                 raise ValueError(f"!Please follow the instructions: {option}.")
             break
         except ValueError as e_rr:
-            print(f"""{Fore.RED}{e_rr}\n\n""")
+            print(f"""{Fore.RED}{e_rr}\n""")
+            print("Try again\n")
     return int(option)
 
 
@@ -88,12 +91,15 @@ def welcome_message():
             abc_user = input(f"{Fore.WHITE}Do you have an account with us?:  ")
             if not abc_user:
                 raise ValueError("Enter a value")
+            if not abc_user[0].isalpha():
+                raise ValueError("Spaces or special characters not allowed")
             if abc_user and abc_user[0] in ('y', 'n'):
                 break
             raise ValueError(f"Answer only: yes or no - {abc_user}")
         except ValueError as e_rr:
             print("\n")
             print(f"""{Fore.RED}{e_rr}.\n\n""")
+            print("Try again.\n")
     return abc_user
 
 
@@ -148,8 +154,11 @@ def create_user():
     while True:
         pin_code = input(f"{Fore.WHITE}Please enter four digit number: ")
         print("Take a note of this number for later use\n")
-        if not pin_code.isnumeric() or len(pin_code) != 4:
-            print(f"{Fore.RED}Only four digit number allowed -{pin_code}\n")
+        if not pin_code:
+            print(f"{Fore.RED}!Enter value for PIN\n")
+            print(f"{Fore.RED}Try again\n")
+        elif not pin_code.isnumeric() or len(pin_code) != 4:
+            print(f"{Fore.RED}!Only four digit number allowed -{pin_code}\n")
             print(f"{Fore.RED}Try again\n")
         else:
             break
