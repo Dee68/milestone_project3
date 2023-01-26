@@ -163,7 +163,7 @@ def create_user():
         else:
             break
     while True:
-        deposit = input(f"{Fore.WHITE}Enter amount to lodge: $ ")
+        deposit = input(f"{Fore.WHITE}Enter amount to lodge:💵 $ ")
         print("\n")
         if not deposit.isnumeric():
             print(f"{Fore.RED} Only numbers allowed - {deposit}\n")
@@ -242,6 +242,8 @@ def validate_pin(account_holder):
         if code == account_holder.get_pin():
             word_wrap("valid PIN, you have successfully logged in.\n\n")
             break
+        if not code:
+            print(f"{Fore.RED}!Enter a value for pin")
         elif code != account_holder.get_pin():
             print(f"{Fore.RED}!Pin code is not correct - {code}.\n")
     else:
