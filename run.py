@@ -201,7 +201,7 @@ def validate__acc_num():
     tries = 0
     while tries < 3:
         tries += 1
-        num = input(f"{Fore.WHITE}Enter account number here: ").strip()
+        num = input(f"{Fore.WHITE}Enter account number here:💳 ").strip()
         print("\n")
         cur_user = [h for h in account_holders if num == h[0]]
         if len(cur_user) == 0:
@@ -267,7 +267,7 @@ def deposit(account):
     tries = 0
     while tries < 3:
         tries += 1
-        amount = input(f"{Fore.GREEN}Enter amount here:$ ")
+        amount = input(f"{Fore.GREEN}Enter amount here 💵:$ ")
         print("\n")
         word_wrap("Checking the input amount ...\n")
         time.sleep(2)
@@ -323,7 +323,7 @@ def withdraw(account):
         if float(account.get_balance()) < float(amount):
             status = False
             raise Exception(f"Insufficient funds: {account.get_balance()}")
-        word_wrap(f"You are good to go! Thank you: \n")
+        word_wrap(f"You are good to go! Thank you:💵 \n")
         account.set_balance(float(account.get_balance()) - float(amount))
         print(f"Your current balance is : {str(account.get_balance())}\n")
         card_holder = SHEET.worksheet('accounts').find(account._acc_num)
