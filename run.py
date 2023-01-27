@@ -88,7 +88,8 @@ def welcome_message():
     while True:
         try:
             print("\n")
-            abc_user = input(f"{Fore.WHITE}Do you have an account with us?:  ").lower()
+            abc_user = input(f"{Fore.WHITE}Do you have an account with us?:  ")
+            abc_user = abc_user.lower()
             if not abc_user:
                 raise ValueError("Enter a value")
             if not abc_user[0].isalpha():
@@ -203,7 +204,6 @@ def validate__acc_num():
         tries += 1
         num = input(f"{Fore.WHITE}Enter account number here:💳 ")
         print("\n")
-        
         cur_user = [h for h in account_holders if num == h[0]]
         if not num:
             print(f"{Fore.RED}Enter account number\n")
