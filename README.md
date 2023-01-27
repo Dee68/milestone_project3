@@ -3,13 +3,18 @@
 - [USER EXPERIENCE UX](#user-experience-ux)
   * [USER STORIES](#user-stories)
 - [SCOPE](#scope)
+- [STRUCTURE](#structure)
 - [FLOWCHART](#flowchart)
 - [FEATURES](#features)
   + [EXISTING FEATURES](#existing-features)
   + [FUTURE FEATURES](#future-features)
+- [LANGUAGES USED](#languages-used)
+- [TECHNOLOGIES USED](#technologies-used)
 - [DATA STORAGE](#data-sorage)
 - [BUGS OR ERRORS](#bugs-or-errors)
+- [UNFIXED BUGS](#unfixed-bugs)
 - [TESTING](#testing)
+- [MANUAL TESTING](#manual-testing)
 - [DEPLOYMENT](#deployment)
 - [CREDITS](#credits)
 - [ACKNOWLEDGEMENTS](#acknowledgements)
@@ -37,6 +42,7 @@ As a general user, I want to:
 
 During this phase of the project design tests were carried out to try out visuals and initial features before establishing the final project repository.
 ## SCOPE
+The project scope follows the minimal viable features approach for the initial project. However the scope is such that interactive features to enhance the user experience will be added in future.
 For the implementation of the ATM banking system I have planned the following features:
 - Data from spreadsheet that contains users account and transactions to be displayed to user in tables.
 - Account creation starts from the begining of the program, if user has no account.
@@ -46,7 +52,8 @@ For the implementation of the ATM banking system I have planned the following fe
 - The program displays warnings in all stages if input values are not given in the correct format.
 - On demand a transaction table is displayed to the account holder if any, showing all his/her transactions with date time, amount and status with reasons if status is failure.
 
-
+## STRUCTURE
+The user experience design is clear and simple with features positioned conventionally. Navigation starts from the welcome message and intuitively exits the user if he/she wishes so.
 
 ### FLOWCHART
 The Flowchart for my program was created using [LucidChart](https://www.lucidchart.com/pages/landing?utm_source=google&utm_medium=cpc&utm_campaign=_chart_en_tier1_mixed_search_brand_exact_&km_CPC_CampaignId=1490375427&km_CPC_AdGroupID=55688909257&km_CPC_Keyword=lucidchart&km_CPC_MatchType=e&km_CPC_ExtensionID=&km_CPC_Network=g&km_CPC_AdPosition=&km_CPC_Creative=442433236001&km_CPC_TargetID=aud-809923745462:kwd-33511936169&km_CPC_Country=20483&km_CPC_Device=c&km_CPC_placement=&km_CPC_target=&gclid=CjwKCAiA2rOeBhAsEiwA2Pl7Q5KsmhzrrvhWJy2CYebbpJzHxt99Tj-XuCHr2wL0hH5yf4c1nGYkMhoCLYgQAvD_BwE) and it visually represents how the system works.
@@ -114,13 +121,47 @@ The data used in this project is stored in google sheet through the google api c
 - Enable users to do payment of utilities(water,gas, internet, telephone, etc)
 - Implement an email message sender to customers about there current account weekly.
 
+### LANGUAGES USED
+- [Python](https://www.python.org/)
+
+### TECHNOLOGIES USED
+Git was used for version control.
+[Gitpod](https://github.com/Code-Institute-Org/python-essentials-template) was used as the IDE
+[Lucidchart](https://www.lucidchart.com/pages/landing?utm_source=google&utm_medium=cpc&utm_campaign=_chart_en_tier1_mixed_search_brand_exact_&km_CPC_CampaignId=1490375427&km_CPC_AdGroupID=55688909257&km_CPC_Keyword=lucidchart&km_CPC_MatchType=e&km_CPC_ExtensionID=&km_CPC_Network=g&km_CPC_AdPosition=&km_CPC_Creative=442433236001&km_CPC_TargetID=aud-809923745462:kwd-33511936169&km_CPC_Country=20483&km_CPC_Device=c&km_CPC_placement=&km_CPC_target=&gclid=CjwKCAiA2rOeBhAsEiwA2Pl7Q5KsmhzrrvhWJy2CYebbpJzHxt99Tj-XuCHr2wL0hH5yf4c1nGYkMhoCLYgQAvD_BwE) was used for the flowchart.
+[pep8](https://pep8ci.herokuapp.com/) was used to validate the python code.
+[Heroku](https://id.heroku.com/) was used to deploy the project.
+
 ### BUGS OR ERRORS
+The following bug was found and squashed:
+
 During the development process, the desire to give a good user experience was placed as the priority as a result, the code to achieve that aim was refactored several times. Finally, this was achieved by introducing the function (do_options) and validating each user input in the (create_user) function.
+
+
+### UNFIXED BUGS
+There are no known outstanding bugs.
 
 
 ### TESTING
 
 All the python files where tested in  [pep8](https://pep8ci.herokuapp.com/)
+
+
+### MANUAL TESTING
+The atm application was tested by friends and collegues.Feedback was overall positive from all users.
+
+The following functioned as intended:
+- Account creation of user works correctly and inserts user credentials to google spreadsheet.
+- Validation of user if promted for credentials
+- Shows menu of options to a logged-in user
+- The deposit function gives a corresponding feedback depending on the users input.
+- Like the deposit function, the withdraw function also gives  corresponding feeback to the user depending on the input.
+- On demand logged-in user can get details of their account or details of their transaction in a table.
+
+
+The following were also tested and function correctly:
+- Every input of users are validated and corresponding error/success message are displayed.
+- The google spreadsheet is updated on every successful creation of a user account and updated on every deposit or withdraw operation by the user.
+
 
 ## DEPLOYMENT
 - This site was deployed by completing the following steps:
@@ -161,13 +202,13 @@ Clone this project by following the steps:
 - The code for linking to the Google Spreadsheet and manipulating it was taken and adapted from the Code Institute Love Sandwiches tutorial
 - The welcome message on the start of the programm was adapted from [ASCII Art generator](https://fsymbols.com/generators/carty/)
 - The word_wrap function for animating the text was adapted from [Animated text tutorial](https://www.youtube.com/watch?v=2h8e0tXHfk0)
-
+- The bank card and bank note images from [emoji](https://getemoji.com/)
 
 
 ## ACKNOWLEDGEMENTS
-- My mentor for his constructive criticism, his encouragement and inspiring feedbacks.
+- My mentor for his extraordinary insight,constructive criticism, encouragement and continuos useful feedback.
 - My code institute facilitator Irene Neveile for keeping up with my schedules.
-- My collegues for their useful suggestions
+- Friends and collegues that helped in testing the application.
 
 
 
