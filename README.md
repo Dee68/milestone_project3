@@ -35,6 +35,7 @@ The Abc ATM Banking System is a fictional ATM that combines the partial function
 As a developer, I want to create:
 * A model of an ATM that will ease clients from the hassle of creating a bank account. 
 * In addition to deposit and withdraw operation, enable the user to create an account.
+
 As a general user, I want to:
 1. Easily navigate through the application
 2. Be able to understand the purpose of the application
