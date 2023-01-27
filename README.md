@@ -37,6 +37,8 @@ As a general user, I want to:
 1. Easily navigate through the application
 2. Be able to understand the purpose of the application
 3. See the correctness of the validation of my input values
+4. Be able to lodge money and withdraw money as an atm.
+5. Be able to create an account easily.
 
 During the design, tests were carried out to try out visuals and initial features before establishing the final project repository.
 ## SCOPE
