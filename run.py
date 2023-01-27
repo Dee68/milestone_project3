@@ -31,8 +31,26 @@ def word_wrap(words):
         time.sleep(0.01)
 
 
+def greet():
+    """ Displays a welcome message. """
+    word_wrap(f"""{Fore.CYAN}
+    =========================================================
+    █░█░█ █▀▀ █░░ █▀▀ █▀█ █▀▄▀█ █▀▀   ▀█▀ █▀█
+    ▀▄▀▄▀ ██▄ █▄▄ █▄▄ █▄█ █░▀░█ ██▄   ░█░ █▄█
+
+    ▄▀█ █▄▄ █▀▀   ▄▀█ ▀█▀ █▀▄▀█
+    █▀█ █▄█ █▄▄   █▀█ ░█░ █░▀░█
+
+    █▄▄ ▄▀█ █▄░█ █▄▀ █ █▄░█ █▀▀
+    █▄█ █▀█ █░▀█ █░█ █ █░▀█ █▄█
+
+    █▀ █▄█ █▀ ▀█▀ █▀▀ █▀▄▀█
+    ▄█ ░█░ ▄█ ░█░ ██▄ █░▀░█
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++++""")
+
+
 def ask_to_continue(current_user):
-    """ Asks user to continue or exit system. """
+    """Asks user to continue or exit. """
     while True:
         choice = input("Do you wish to continue?(Y/N): ")
         if choice and choice.strip().lower()[0] == 'y':
@@ -45,7 +63,10 @@ def ask_to_continue(current_user):
                 break
         elif choice and choice.strip().lower()[0] == 'n':
             print(f"""{Fore.GREEN}\n\nTHANK YOU FOR USING OUR SERVICES.""")
-            sys.exit()
+            if current_user:
+                greet()
+                p = controller()
+            # sys.exit()
             break
         else:
             print(f"{Fore.RED}Enter only yes or no!!!\n")
@@ -54,6 +75,7 @@ def ask_to_continue(current_user):
 def show_menu():
     """ Displays the menu to a user and takes in option input,
         validates it and return an integer of it.
+        Returns:(Integer) the value of the option chosen.
     """
     word_wrap(f"""{Fore.CYAN}
     |====================================================|\n
@@ -83,7 +105,9 @@ def show_menu():
 
 def welcome_message():
     """ Asks user if user has an account or not and
-        returns first letter of user input.
+        returns first letter in lower case of user input.
+        Returns:
+            string: either y or n
      """
     while True:
         try:
@@ -105,17 +129,17 @@ def welcome_message():
 
 
 def create_user():
-    """
-    Collects user input, validate input values and creates an account for user.
-    Returns an account object.
+    """Collects input,validate input values and creates an account for user.
+    Returns:
+        object: instance of the Account class.
     """
     time.sleep(2)
     print("\n\n")
     word_wrap(f"""{Fore.WHITE}    ============= ACCOUNT CREATION =============
     |===========================================|\n\n""")
     user_account = []
-    _acc_num = "ac" + str(randint(10000000000000, 99999999999999))
-    user_account.append(_acc_num)
+    acc_num = "ac" + str(randint(10000000000000, 99999999999999))
+    user_account.append(acc_num)
     while True:
         f_name = input("\033[1m" + f"""{Fore.WHITE}Enter first name: """)
         print("\n")
@@ -153,7 +177,7 @@ def create_user():
         else:
             break
     while True:
-        pin_code = input(f"{Fore.WHITE}Please enter four digit number: ")
+        pin_code = input(f"{Fore.WHITE}Please enter PIN: ")
         print("Take a note of this number for later use\n")
         if not pin_code:
             print(f"{Fore.RED}!Enter value for PIN\n")
@@ -180,7 +204,7 @@ def create_user():
     msg = "your account has been created successfully"
     word_wrap(f"{f_name} {l_name} {msg}.\n\n")
     print(f"Please take note of your Account number and your PIN: \n")
-    word_wrap(f"Account Number: {_acc_num}, PIN: {pin_code}.\n")
+    word_wrap(f"Account Number: {acc_num}, PIN: {pin_code}.\n")
     a_1 = user_account[0]
     a_2 = user_account[1]
     a_3 = user_account[2]
@@ -195,6 +219,8 @@ def validate__acc_num():
     """ Validates validity of user account number
         and terminates after 3 unsuccessfull attempts.
         Returns false on failure or returns account object on success.
+        Returns:
+            object: Instance of the Account class.
     """
     print("\n\n")
     word_wrap("============== ACCOUNT VALIDATION ==============\n\n")
@@ -214,8 +240,8 @@ def validate__acc_num():
     else:
         print(f"{Fore.RED}You have exceeded trial limit.\n")
         print(f"{Fore.RED}Please contact the bank officials.\n")
+        print(f"{Fore.YELLOW}Or create an account.\n")
         print(f"""{Fore.GREEN}Thank you for using our services.\n\n""")
-        sys.exit()
         time.sleep(2)
         return False
     time.sleep(3)
@@ -230,44 +256,52 @@ def validate__acc_num():
     return account(t_1, t_2, t_3, t_4, t_5)
 
 
-def validate_pin(account_holder):
-    """ Validates user input for PIN
-        and terminates after 3 unsuccessfull attempts.
-        Returns false or true.
+def validate_pin(acc_holder):
+    """Validates user input for PIN,terminates after 3 unsuccessfull attempts.
+    Args:
+        acc_holder (Account): instance of the Account class
+    Returns:
+        bool: True if successfull else False
     """
     print("\n\n")
     word_wrap(f"{Fore.GREEN}=========== PIN VALIDATION ============\n\n")
     tries = 0
     while tries < 3:
         tries += 1
-        code = input(f"{Fore.GREEN}Enter four digit pin: ").strip()
+        code = input(f"{Fore.GREEN}Enter PIN: ").strip()
         print("\n")
-        if code == account_holder.get_pin():
+        if code == acc_holder.pin:
             word_wrap("valid PIN, you have successfully logged in.\n\n")
             break
         if not code:
             print(f"{Fore.RED}!Enter a value for pin")
-        elif code != account_holder.get_pin():
+        elif code != acc_holder.get_pin():
             print(f"{Fore.RED}!Pin code is not correct - {code}.\n")
     else:
         print(f"{Fore.YELLOW}You have exceeded trial limit.\n")
         print("Contact bank officials by phone.\n")
-        sys.exit()
+        time.sleep(2)
         return False
     return True
 
 
-def deposit(account):
-    """ Deposit amount of money to own account,
+def deposit(acc_holder):
+    """Deposit amount of money to own account,
         updates the transaction worksheet and terminates
         after 3 unsuccessfull attempts.
-     """
+
+    Args:
+        acc_holder (Account): instance of the class Account
+
+    Returns:
+        bool: (status)True if successful or else False
+    """
     word_wrap("========== DEPOSIT OPERATION =============\n\n")
     transact = []
     td = str(int(datetime.datetime.now().timestamp()))
     trans_id = "D" + str(randint(0, 101)) + td
     transact.append(trans_id)
-    transact.append(account._acc_num)
+    transact.append(acc_holder.acc_num)
     transact.append(datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S"))
     tries = 0
     while tries < 3:
@@ -279,22 +313,22 @@ def deposit(account):
         if not amount.isnumeric():
             print(f"{Fore.RED}Only figures of amount allowed - {amount}\n")
             status = False
-            new_balance = float(account.get_balance())
+            new_balance = float(acc_holder.balance)
         else:
             status = True
-            new_balance = float(account.get_balance()) + float(amount)
+            new_balance = float(acc_holder.balance) + float(amount)
             break
     else:
         print(f"{Fore.YELLOW}Sorry you've reached your trial limit.\n")
         print("Consult bank officials by phone for further instructions.\n")
     if not amount.isnumeric():
-        new_balance = float(account.get_balance())
+        new_balance = float(acc_holder.balance)
     else:
-        new_balance = float(account.get_balance()) + float(amount)
-    account.set_balance(new_balance)
-    bal = str(int(account.get_balance()))
+        new_balance = float(acc_holder.balance) + float(amount)
+    acc_holder.balance = new_balance
+    bal = str(int(acc_holder.balance))
     print(f"{Fore.WHITE}Your current balance is {bal} \n")
-    card_holder = SHEET.worksheet('accounts').find(account._acc_num)
+    card_holder = SHEET.worksheet('accounts').find(acc_holder.acc_num)
     SHEET.worksheet('accounts').update_cell(card_holder.row, 5, bal)
     if status:
         transact.append('SUCCESS')
@@ -306,10 +340,20 @@ def deposit(account):
     return status
 
 
-def withdraw(account):
-    """ withdraws amount of money from account
+def withdraw(acc_holder):
+    """Withdraws amount of money from account
         if availabe or shows corresponding error,
         and updates the transaction worksheet, returns status.
+
+    Args:
+        acc_holder (Account): instance of the Account class
+
+    Raises:
+        Exception: invalid input(ValueError)
+        Exception: valid input value but insufficent fund
+
+    Returns:
+        bool: True if successful else False
     """
     word_wrap("========== WITHDRAWAL OPERATION ==============\n\n")
     transact = []
@@ -317,7 +361,7 @@ def withdraw(account):
     trans_id += str(randint(0, 101))
     trans_id += str(int(datetime.datetime.now().timestamp()))
     transact.append(trans_id)
-    transact.append(account._acc_num)
+    transact.append(acc_holder.acc_num)
     transact.append(datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S"))
     try:
         amount = input(f"{Fore.GREEN}Amount to withdraw:$ ")
@@ -325,19 +369,19 @@ def withdraw(account):
         if not amount.isnumeric():
             status = False
             raise Exception(f"Only figures of amount allowed {amount}")
-        if float(account.get_balance()) < float(amount):
+        if float(acc_holder.balance) < float(amount):
             status = False
-            raise Exception(f"Insufficient funds: {account.get_balance()}")
+            raise Exception(f"Insufficient funds: {acc_holder.balance}")
         word_wrap(f"You are good to go! Thank you:💵 \n")
-        account.set_balance(float(account.get_balance()) - float(amount))
-        print(f"Your current balance is : {str(account.get_balance())}\n")
-        card_holder = SHEET.worksheet('accounts').find(account._acc_num)
-        bal = str(int(account.get_balance()))
+        acc_holder.set_balance(float(acc_holder.balance) - float(amount))
+        print(f"Your current balance is : {str(acc_holder.balance)}\n")
+        card_holder = SHEET.worksheet('accounts').find(acc_holder.acc_num)
+        bal = str(int(acc_holder.balance))
         SHEET.worksheet('accounts').update_cell(card_holder.row, 5, bal)
         status = True
     except Exception as e_rr:
-        print(f"{Fore.RED}{e_rr}, {Fore.GREEN}perhaps you need  a credit.\n")
-        print(f"{Fore.GREEN}Call the bank and talk things over with them.\n")
+        print(f"{Fore.RED}{e_rr}, {Fore.GREEN}perhaps you need  a credit.\n\n")
+        print(f"{Fore.GREEN}Call the bank and talk things over with them.\n\n")
         status = False
     if status:
         transact.append('SUCCESS')
@@ -349,10 +393,14 @@ def withdraw(account):
     return status
 
 
-def display_account_details(account):
-    """ Displays account details of a logged in user."""
-    account_holders = SHEET.worksheet('accounts').get_all_values()[1:]
-    cur_user = [h for h in account_holders if account._acc_num == h[0]]
+def display_account_details(acc_holder):
+    """Displays account details of a logged in user.
+
+    Args:
+        acc_holder (Account): instance of Account class.
+    """
+    acc_holders = SHEET.worksheet('accounts').get_all_values()[1:]
+    cur_user = [h for h in acc_holders if acc_holder.acc_num == h[0]]
     table = Texttable()
     h_1 = ['Account Number', 'First Name', 'Last Name', 'PIN', 'Balance']
     table.header(h_1)
@@ -360,16 +408,20 @@ def display_account_details(account):
         table.add_row(user)
     print(table.draw())
     print("\n\n")
-    ask_to_continue(account)
+    ask_to_continue(acc_holder)
 
 
-def transcript_receipt(account):
-    """ Displays all transactions of a user if any """
+def transcript_receipt(acc_holder):
+    """Displays all transactions of a user if any
+
+    Args:
+        acc_holder (Account): instance of the Account class.
+    """
     transactions = SHEET.worksheet('transaction').get_all_values()[1:]
-    user_transacts = [tr for tr in transactions if account._acc_num == tr[1]]
+    user_transacts = [tr for tr in transactions if acc_holder.acc_num == tr[1]]
     if len(user_transacts) == 0:
         word_wrap(f"{Fore.CYAN}You've no transactions done yet\n")
-        ask_to_continue(account)
+        ask_to_continue(acc_holder)
     else:
         table = Texttable()
         h_1 = ['TransactionId', 'AccountId', 'Date & Time', 'Status', 'Amount']
@@ -386,12 +438,17 @@ def transcript_receipt(account):
         print(f"YOUR TRANSACTIONS\n")
         print(table.draw())
         print("\n\n")
-        ask_to_continue(account)
+        ask_to_continue(acc_holder)
 
 
 def do_options(p, abc_user):
     """ implements different operational functions
         depending on the value of p.
+
+    Args:
+        p (Integer):
+            the value of option chosen by the user
+            abc_user (Account): Instance of the Account class.
     """
     if p == 1:
         time.sleep(3)
@@ -416,7 +473,8 @@ def do_options(p, abc_user):
 
 
 def controller():
-    """ Controls the functions sequesnces"""
+    """ Controls the functions sequesnces.
+    """
     new_user = welcome_message()
     if new_user.strip().lower()[0] == 'y':
         abc_user = validate__acc_num()
@@ -426,10 +484,11 @@ def controller():
                 do_options(p, abc_user)
             else:
                 print(chr(27) + "[2J")
-                print(f"{Fore.CYAN}Contact the bank officials for assistance.")
-                sys.exit()
+                greet()
+                controller()
         else:
-            sys.exit()
+            greet()
+            controller()
     if new_user.strip().lower()[0] == 'n':
         create_user()
         controller()
@@ -441,19 +500,6 @@ def main():
 
 
 if __name__ == "__main__":
-    word_wrap(f"""{Fore.CYAN}
-    =========================================================
-    █░█░█ █▀▀ █░░ █▀▀ █▀█ █▀▄▀█ █▀▀   ▀█▀ █▀█
-    ▀▄▀▄▀ ██▄ █▄▄ █▄▄ █▄█ █░▀░█ ██▄   ░█░ █▄█
-
-    ▄▀█ █▄▄ █▀▀   ▄▀█ ▀█▀ █▀▄▀█
-    █▀█ █▄█ █▄▄   █▀█ ░█░ █░▀░█
-
-    █▄▄ ▄▀█ █▄░█ █▄▀ █ █▄░█ █▀▀
-    █▄█ █▀█ █░▀█ █░█ █ █░▀█ █▄█
-
-    █▀ █▄█ █▀ ▀█▀ █▀▀ █▀▄▀█
-    ▄█ ░█░ ▄█ ░█░ ██▄ █░▀░█
-    +++++++++++++++++++++++++++++++++++++++++++++++++++++++""")
+    greet()
     print("\n\n")
     main()
