@@ -33,27 +33,28 @@ The Abc ATM Banking System is a fictional ATM that combines the partial function
 ## USER EXPERIENCE UX
 ### USER STORIES
 As a developer, I want to create:
-* a model of an ATM that will ease clients from the hassle of creating a bank account in addition to its normal functions of depositing and withdrawing money.
-
+* A model of an ATM that will ease clients from the hassle of creating a bank account. 
+* In addition to deposit and withdraw operation, enable the user to create an account.
 As a general user, I want to:
 1. Easily navigate through the application
 2. Be able to understand the purpose of the application
 3. See the correctness of the validation of my input values
 
-During this phase of the project design tests were carried out to try out visuals and initial features before establishing the final project repository.
+During the design, tests were carried out to try out visuals and initial features before establishing the final project repository.
 ## SCOPE
-The project scope follows the minimal viable features approach for the initial project. However the scope is such that interactive features to enhance the user experience will be added in future.
+The project scope follows the minimal viable features approach for the initial project. However the scope is such that interactive features to enhance the user experience will be added in the future.
 For the implementation of the ATM banking system I have planned the following features:
-- Data from spreadsheet that contains users account and transactions to be displayed to user in tables.
-- Account creation starts from the begining of the program, if user has no account.
-- User account will be validated, if correct an option screen will be displayed to user otherwise user will be refered back to create an accoount.
-- The deposit option enables the user to add money to his/her account on passing the validation of the input data. The value of the amount, status and date time are inserted to the transaction spreadsheet table.
-- The withdraw option like the deposit option enables user to remove money from his/her account if the amount input is valid. The amount requested by user, status and date time are inserted to the transactions spreadsheet table.
+- Data from spreadsheet that contains the user's account and transactions to be displayed to the user in tables.
+- Account creation starts from the beginning of the program if the user has no account.
+- User account will be validated, if correct an option screen will be displayed to the user otherwise user will be referred back to create an account.
+- The deposit option enables the user to add money to his/her account on passing the validation of the input data. The value of the amount, status, and date time is inserted into the transaction spreadsheet table.
+- The withdraw option like the deposit option enables the user to remove money from his/her account if the amount input is valid. The amount requested by the user, status, and date time are inserted into the transactions spreadsheet table.
 - The program displays warnings in all stages if input values are not given in the correct format.
-- On demand a transaction table is displayed to the account holder if any, showing all his/her transactions with date time, amount and status with reasons if status is failure.
+- On-demand, a transaction table is displayed to the account holder if any, showing all his/her transactions with date time, amount, and status with reasons if the status is a failure.
 
 ## STRUCTURE
-The user experience design is clear and simple with features positioned conventionally. Navigation starts from the welcome message and intuitively exits the user if he/she wishes so.
+The user experience design is explicit, with features positioned conventionally. Navigation starts from the welcome message and intuitively exits the user if he wishes to.
+
 
 ### FLOWCHART
 The Flowchart for my program was created using [LucidChart](https://www.lucidchart.com/pages/landing?utm_source=google&utm_medium=cpc&utm_campaign=_chart_en_tier1_mixed_search_brand_exact_&km_CPC_CampaignId=1490375427&km_CPC_AdGroupID=55688909257&km_CPC_Keyword=lucidchart&km_CPC_MatchType=e&km_CPC_ExtensionID=&km_CPC_Network=g&km_CPC_AdPosition=&km_CPC_Creative=442433236001&km_CPC_TargetID=aud-809923745462:kwd-33511936169&km_CPC_Country=20483&km_CPC_Device=c&km_CPC_placement=&km_CPC_target=&gclid=CjwKCAiA2rOeBhAsEiwA2Pl7Q5KsmhzrrvhWJy2CYebbpJzHxt99Tj-XuCHr2wL0hH5yf4c1nGYkMhoCLYgQAvD_BwE) and it visually represents how the system works.
@@ -117,9 +118,9 @@ The data used in this project is stored in google sheet through the google api c
 
 
 ### FUTURE FEATURES
-- Implement a more modern and secure way to save users credentials
-- Enable users to do payment of utilities(water,gas, internet, telephone, etc)
-- Implement an email message sender to customers about there current account weekly.
+- Implement a more modern and secure way to save user's credentials
+- Enable user's to do payment of utilities(water,gas, internet, telephone, etc)
+- Implement an email message sent to customers about their current account weekly.
 
 ### LANGUAGES USED
 - [Python](https://www.python.org/)
@@ -134,7 +135,7 @@ Git was used for version control.
 ### BUGS OR ERRORS
 The following bug was found and squashed:
 
-During the development process, the desire to give a good user experience was placed as the priority as a result, the code to achieve that aim was refactored several times. Finally, this was achieved by introducing the function (do_options) and validating each user input in the (create_user) function.
+During the development process, the desire to give a good user experience was placed as the priority as a result, the code to achieve that aim was refactored several times. Finally, this was achieved, by introducing the function (do_options) and validating each user input in the (create_user) function.
 
 
 ### UNFIXED BUGS
@@ -147,20 +148,21 @@ All the python files where tested in  [pep8](https://pep8ci.herokuapp.com/)
 
 
 ### MANUAL TESTING
-The atm application was tested by friends and collegues.Feedback was overall positive from all users.
+Various users tested the atm application. Feedback was overall positive from all users.
 
 The following functioned as intended:
 - Account creation of user works correctly and inserts user credentials to google spreadsheet.
-- Validation of user if promted for credentials
-- Shows menu of options to a logged-in user
-- The deposit function gives a corresponding feedback depending on the users input.
-- Like the deposit function, the withdraw function also gives  corresponding feeback to the user depending on the input.
-- On demand logged-in user can get details of their account or details of their transaction in a table.
+- Validation of user if prompted for credentials
+- Shows a menu of options to a logged-in user
+- The deposit function gives corresponding feedback depending on the user's input.
+- Like the deposit function, the withdraw function also gives the corresponding feedback to the user depending on the input.
+- On-demand users logged in can get details of their account or their transaction in a table.
 
 
 The following were also tested and function correctly:
-- Every input of users are validated and corresponding error/success message are displayed.
-- The google spreadsheet is updated on every successful creation of a user account and updated on every deposit or withdraw operation by the user.
+- Every input of users is validated, and the corresponding error/success message is displayed.
+- The google spreadsheet is updated on every successful creation of an account.
+- On every deposit or withdraw function call, the google spreadsheet is updated.
 
 
 ## DEPLOYMENT
@@ -174,13 +176,13 @@ The following were also tested and function correctly:
 7. Click Reveal Config Vars and enter port into the Key box and 8000 into the Value box and click the Add button
 8. Click Reveal Config Vars again and enter CREDS into the Key box and the Google credentials into the Value box
 9. Next, scroll down to the Buildpack section click Add Buildpack select python and click Save Changes
-10. Repeat step 9 to add node.js. o Note: The Buildpacks must be in the correct order. If not click and drag them to move into the correct order
+10. Repeat step 9 to add node.js. o, Note: The Buildpacks must be in the correct order. If not click and drag them to move into the correct order
 11. Scroll to the top of the page and choose the Deploy tab
 12. Select Github as the deployment method
 13. Confirm you want to connect to GitHub
 14. Search for the repository name and click the connect button
 15. Scroll to the bottom of the deploy page and select the preferred deployment type
-16. Click either Enable Automatic Deploys for automatic deployment when you push updates to Github
+16. Click either Enable Automatic Deploys for automatic deployment when you push updates to GitHUB
 
 ### FORKING 
 Fork this project by following the steps:
@@ -206,9 +208,9 @@ Clone this project by following the steps:
 
 
 ## ACKNOWLEDGEMENTS
-- My mentor for his extraordinary insight,constructive criticism, encouragement and continuos useful feedback.
+- My mentor for his extraordinary insight, constructive criticism, encouragement, and continuous vital feedback.
 - My code institute facilitator Irene Neveile for keeping up with my schedules.
-- Friends and collegues that helped in testing the application.
+- Friends and colleagues that helped in testing the application.
 
 
 
