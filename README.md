@@ -32,9 +32,6 @@ The Abc ATM Banking System is a fictional ATM that combines the partial function
 
 ## USER EXPERIENCE UX
 ### USER STORIES
-As a developer, I want to create:
-* A model of an ATM that will ease clients from the hassle of creating a bank account. 
-* In addition to deposit and withdraw operation, enable the user to create an account.
 
 As a general user, I want to:
 1. Easily navigate through the application
@@ -156,6 +153,7 @@ All the python files where tested in  [pep8](https://pep8ci.herokuapp.com/)
 Various users tested the atm application. Feedback was overall positive from all users.
 
 The following functioned as intended:
+
 - Account creation of user works correctly and inserts user credentials to google spreadsheet.
 - Validation of user if prompted for credentials
 - Shows a menu of options to a logged-in user
@@ -168,6 +166,7 @@ The following were also tested and function correctly:
 - Every input of users is validated, and the corresponding error/success message is displayed.
 - The google spreadsheet is updated on every successful creation of an account.
 - On every deposit or withdraw function call, the google spreadsheet is updated.
+- The purpose of the application can be seen as the ease to create a user account.
 
 
 ## DEPLOYMENT
@@ -213,7 +212,7 @@ Clone this project by following the steps:
 
 
 ## ACKNOWLEDGEMENTS
-- My mentor for his extraordinary insight, constructive criticism, encouragement, and continuous vital feedback.
+- My mentor Jack Wachira for his extraordinary insight, constructive criticism, encouragement, and continuous vital feedback.
 - My code institute facilitator Irene Neveile for keeping up with my schedules.
 - Friends and colleagues that helped in testing the application.
 
