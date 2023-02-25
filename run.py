@@ -373,7 +373,7 @@ def withdraw(acc_holder):
             status = False
             raise Exception(f"Insufficient funds: {acc_holder.balance}")
         word_wrap(f"You are good to go! Thank you:💵 \n")
-        acc_holder.set_balance(float(acc_holder.balance) - float(amount))
+        acc_holder.balance(float(acc_holder.balance) - float(amount))
         print(f"Your current balance is : {str(acc_holder.balance)}\n")
         card_holder = SHEET.worksheet('accounts').find(acc_holder.acc_num)
         bal = str(int(acc_holder.balance))
